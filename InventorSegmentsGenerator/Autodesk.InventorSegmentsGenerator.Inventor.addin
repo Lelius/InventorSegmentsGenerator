@@ -1,0 +1,14 @@
+<Addin Type="Standard">
+  <!--Created for Autodesk Inventor Version 23.0-->
+  <ClassId>{43457a9b-2327-48bc-9c57-be7407696fb3}</ClassId>
+  <ClientId>{43457a9b-2327-48bc-9c57-be7407696fb3}</ClientId>
+  <DisplayName>InventorSegmentsGenerator</DisplayName>
+  <Description>InventorSegmentsGenerator</Description>
+  <Assembly>InventorSegmentsGenerator.dll</Assembly>
+  <LoadOnStartUp>1</LoadOnStartUp>
+  <UserUnloadable>1</UserUnloadable>
+  <Hidden>0</Hidden>
+  <SupportedSoftwareVersionGreaterThan>22..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserInterfaceVersion>1</UserInterfaceVersion>
+</Addin>

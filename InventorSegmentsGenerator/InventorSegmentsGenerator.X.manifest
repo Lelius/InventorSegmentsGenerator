@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+
+  <assemblyIdentity name="InventorSegmentsGenerator" version="1.0.0.0"></assemblyIdentity>
+
+  <clrClass clsid="{43457a9b-2327-48bc-9c57-be7407696fb3}" progid="InventorSegmentsGenerator.StandardAddInServer" threadingModel="Both" name="InventorSegmentsGenerator.StandardAddInServer" runtimeVersion=""></clrClass>
+
+  <file name="InventorSegmentsGenerator.dll" hashalg="SHA1"></file>
+
+</assembly>

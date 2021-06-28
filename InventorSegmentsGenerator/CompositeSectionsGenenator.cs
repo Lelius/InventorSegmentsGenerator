@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
+﻿using System.Windows.Forms;
 using Inventor;
 
-namespace InvAddIn
+namespace InventorSegmentsGenerator
 {
     class CompositeSectionsGenenator
     {
@@ -16,7 +11,7 @@ namespace InvAddIn
         ButtonDefinition m_buttonSectionsGenerator;
         ButtonIcons m_buttonIcons;
         FormSectionsGenerator m_mainForm;
-
+        CompositeSection m_compositeSection;
 
         public CompositeSectionsGenenator(Inventor.Application m_inventorApplication)
         {
@@ -37,7 +32,7 @@ namespace InvAddIn
 
         private void M_buttonSectionsGenerator_OnExecute(NameValueMap Context)
         {
-            m_mainForm = new FormSectionsGenerator();
+            m_mainForm = new FormSectionsGenerator(ref m_compositeSection);
             m_mainForm.Show();
         }
 

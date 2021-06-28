@@ -1,5 +1,5 @@
 ﻿
-namespace InvAddIn
+namespace InventorSegmentsGenerator
 {
     partial class FormSectionsGenerator
     {
@@ -55,13 +55,13 @@ namespace InvAddIn
             this.textBoxDistanceShortRods = new System.Windows.Forms.TextBox();
             this.textBoxDistanceShortRodSideStand = new System.Windows.Forms.TextBox();
             this.comboBoxTypeSupport = new System.Windows.Forms.ComboBox();
+            this.comboBoxNumberSupport = new System.Windows.Forms.ComboBox();
+            this.labelNumberSupport = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.labelNumberSupport = new System.Windows.Forms.Label();
-            this.comboBoxNumberSupport = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -252,7 +252,7 @@ namespace InvAddIn
             this.comboBoxChannel.Items.AddRange(new object[] {
             "А38",
             "А48"});
-            this.comboBoxChannel.Location = new System.Drawing.Point(437, 20);
+            this.comboBoxChannel.Location = new System.Drawing.Point(437, 19);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(100, 28);
             this.comboBoxChannel.Sorted = true;
@@ -312,7 +312,7 @@ namespace InvAddIn
             this.comboBoxCenterLayout.Items.AddRange(new object[] {
             "Пруток",
             "Пусто"});
-            this.comboBoxCenterLayout.Location = new System.Drawing.Point(437, 249);
+            this.comboBoxCenterLayout.Location = new System.Drawing.Point(437, 250);
             this.comboBoxCenterLayout.Name = "comboBoxCenterLayout";
             this.comboBoxCenterLayout.Size = new System.Drawing.Size(100, 28);
             this.comboBoxCenterLayout.TabIndex = 16;
@@ -362,11 +362,35 @@ namespace InvAddIn
             "Башмак",
             "Грунт",
             "Нет"});
-            this.comboBoxTypeSupport.Location = new System.Drawing.Point(437, 527);
+            this.comboBoxTypeSupport.Location = new System.Drawing.Point(437, 528);
             this.comboBoxTypeSupport.Name = "comboBoxTypeSupport";
             this.comboBoxTypeSupport.Size = new System.Drawing.Size(100, 28);
             this.comboBoxTypeSupport.TabIndex = 21;
             this.comboBoxTypeSupport.Text = "Грунт";
+            // 
+            // comboBoxNumberSupport
+            // 
+            this.comboBoxNumberSupport.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxNumberSupport.FormattingEnabled = true;
+            this.comboBoxNumberSupport.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "Нет"});
+            this.comboBoxNumberSupport.Location = new System.Drawing.Point(437, 479);
+            this.comboBoxNumberSupport.Name = "comboBoxNumberSupport";
+            this.comboBoxNumberSupport.Size = new System.Drawing.Size(101, 28);
+            this.comboBoxNumberSupport.TabIndex = 23;
+            this.comboBoxNumberSupport.Text = "2";
+            // 
+            // labelNumberSupport
+            // 
+            this.labelNumberSupport.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelNumberSupport.AutoSize = true;
+            this.labelNumberSupport.Location = new System.Drawing.Point(13, 483);
+            this.labelNumberSupport.Name = "labelNumberSupport";
+            this.labelNumberSupport.Size = new System.Drawing.Size(195, 20);
+            this.labelNumberSupport.TabIndex = 22;
+            this.labelNumberSupport.Text = "Количество опор (шт)";
             // 
             // panel2
             // 
@@ -424,30 +448,6 @@ namespace InvAddIn
             this.label12.Size = new System.Drawing.Size(62, 20);
             this.label12.TabIndex = 11;
             this.label12.Text = "label12";
-            // 
-            // labelNumberSupport
-            // 
-            this.labelNumberSupport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelNumberSupport.AutoSize = true;
-            this.labelNumberSupport.Location = new System.Drawing.Point(13, 483);
-            this.labelNumberSupport.Name = "labelNumberSupport";
-            this.labelNumberSupport.Size = new System.Drawing.Size(195, 20);
-            this.labelNumberSupport.TabIndex = 22;
-            this.labelNumberSupport.Text = "Количество опор (шт)";
-            // 
-            // comboBoxNumberSupport
-            // 
-            this.comboBoxNumberSupport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBoxNumberSupport.FormattingEnabled = true;
-            this.comboBoxNumberSupport.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "Нет"});
-            this.comboBoxNumberSupport.Location = new System.Drawing.Point(437, 480);
-            this.comboBoxNumberSupport.Name = "comboBoxNumberSupport";
-            this.comboBoxNumberSupport.Size = new System.Drawing.Size(101, 28);
-            this.comboBoxNumberSupport.TabIndex = 23;
-            this.comboBoxNumberSupport.Text = "2";
             // 
             // FormSectionsGenerator
             // 

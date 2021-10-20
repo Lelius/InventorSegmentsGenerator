@@ -4,16 +4,14 @@ namespace InventorSegmentsGenerator
 {
     public partial class FormSectionsGenerator : Form
     {
-        public FormSectionsGenerator()
+         public FormSectionsGenerator()
         {
             InitializeComponent();
-        }
 
-        public FormSectionsGenerator(ref CompositeSection m_compositeSection)
-        {
-            InitializeComponent();
+            CompositeSection m_compositeSection = new CompositeSection();
             comboBoxChannel.SelectedIndex = 1;
             textBoxLengthSection.Text = m_compositeSection.Length.ToString();
+        
         }
     }
 }

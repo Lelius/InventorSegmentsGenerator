@@ -252,7 +252,7 @@ namespace InventorSegmentsGenerator
             this.comboBoxChannel.Items.AddRange(new object[] {
             "А38",
             "А48"});
-            this.comboBoxChannel.Location = new System.Drawing.Point(439, 24);
+            this.comboBoxChannel.Location = new System.Drawing.Point(439, 23);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(100, 28);
             this.comboBoxChannel.Sorted = true;
@@ -312,7 +312,7 @@ namespace InventorSegmentsGenerator
             this.comboBoxCenterLayout.Items.AddRange(new object[] {
             "Пруток",
             "Пусто"});
-            this.comboBoxCenterLayout.Location = new System.Drawing.Point(439, 293);
+            this.comboBoxCenterLayout.Location = new System.Drawing.Point(439, 294);
             this.comboBoxCenterLayout.Name = "comboBoxCenterLayout";
             this.comboBoxCenterLayout.Size = new System.Drawing.Size(100, 28);
             this.comboBoxCenterLayout.TabIndex = 16;
@@ -362,7 +362,7 @@ namespace InventorSegmentsGenerator
             "Башмак",
             "Грунт",
             "Нет"});
-            this.comboBoxTypeSupport.Location = new System.Drawing.Point(439, 618);
+            this.comboBoxTypeSupport.Location = new System.Drawing.Point(439, 620);
             this.comboBoxTypeSupport.Name = "comboBoxTypeSupport";
             this.comboBoxTypeSupport.Size = new System.Drawing.Size(100, 28);
             this.comboBoxTypeSupport.TabIndex = 21;
@@ -376,7 +376,7 @@ namespace InventorSegmentsGenerator
             "1",
             "2",
             "Нет"});
-            this.comboBoxNumberSupport.Location = new System.Drawing.Point(439, 564);
+            this.comboBoxNumberSupport.Location = new System.Drawing.Point(439, 563);
             this.comboBoxNumberSupport.Name = "comboBoxNumberSupport";
             this.comboBoxNumberSupport.Size = new System.Drawing.Size(101, 28);
             this.comboBoxNumberSupport.TabIndex = 23;

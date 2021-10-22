@@ -34,15 +34,86 @@ namespace InventorSegmentsGenerator
 
             //(Channel38(20, "Стеклопластик", "Оранжевый")).DisplayName = "Стойка";
 
-            (ProfileG38x39(2.4, "Стеклопластик", "Оранжевый")).DisplayName = "Вкладыш";
+            //(ProfileG38x39(2.4, "Стеклопластик", "Оранжевый")).DisplayName = "Вкладыш";
+
+            (ProfileE38(10, "Стеклопластик", "Оранжевый")).DisplayName = "Вкладыш";
 
             //m_mainForm = new FormSectionsGenerator();
             //m_mainForm.Show();
         }
 
 
+        #region Деталь Е38
+        private Document ProfileE38(double lengthProfile, string materialProfile = "", string colorProfile = "")
+        {
+            Document oDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kPartDocumentObject, "", true);
+            PartDocument oPartDoc = oDoc as PartDocument;
+            PartComponentDefinition oCompDef = oPartDoc.ComponentDefinition;
+            PlanarSketch oSketch = oCompDef.Sketches.Add(oPartDoc.ComponentDefinition.WorkPlanes[3]);
+
+            oDoc.UnitsOfMeasure.LengthUnits = UnitsTypeEnum.kMillimeterLengthUnits;
+
+            TransientGeometry oTransGeo = m_inventorApplication.TransientGeometry;
+
+            Point2d[] point = new Point2d[4];
+            point[0] = oTransGeo.CreatePoint2d(0, 0);
+            point[1] = oTransGeo.CreatePoint2d(0, 2.5);
+            point[2] = oTransGeo.CreatePoint2d(3.8, 2.5);
+            point[3] = oTransGeo.CreatePoint2d(3.8, 0);
+
+            SketchLine[] oLines = new SketchLine[4];
+            oLines[0] = oSketch.SketchLines.AddByTwoPoints(point[0], point[1]);
+            oLines[1] = oSketch.SketchLines.AddByTwoPoints(oLines[0].EndSketchPoint, point[2]);
+            oLines[2] = oSketch.SketchLines.AddByTwoPoints(oLines[1].EndSketchPoint, point[3]);
+            oLines[3] = oSketch.SketchLines.AddByTwoPoints(oLines[2].EndSketchPoint, oLines[0].StartSketchPoint);
+
+            Profile oProfile = oSketch.Profiles.AddForSolid();
+            ExtrudeDefinition oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kJoinOperation);
+            oExtrudeDef.SetDistanceExtent(lengthProfile, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
+            ExtrudeFeature oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
+
+
+            EdgeCollection oEdges = m_inventorApplication.TransientObjects.CreateEdgeCollection();
+
+            foreach (Edge oEdge in (oExtrude.SideFaces[3].Edges))
+            {
+                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthProfile) < 0.0001)
+                {
+                    oEdges.Add(oEdge);
+                }
+            }
+            if (oEdges.Count > 0)
+            {
+                FilletFeature oFillet = oCompDef.Features.FilletFeatures.AddSimple(oEdges, 0.15);
+            }
+
+            Material oMaterial = oPartDoc.ComponentDefinition.Material;
+            foreach (Material mat in oPartDoc.Materials)
+            {
+                if (mat.Name == materialProfile)
+                {
+                    oMaterial = mat;
+                }
+            }
+            oPartDoc.ComponentDefinition.Material = oMaterial;
+
+            RenderStyle oRenderStyle = oPartDoc.ComponentDefinition.Material.RenderStyle;
+            foreach (RenderStyle style in oPartDoc.RenderStyles)
+            {
+                if (style.Name == colorProfile)
+                {
+                    oRenderStyle = style;
+                }
+            }
+            oPartDoc.ComponentDefinition.Material.RenderStyle = oRenderStyle;
+
+            return oDoc;
+        }
+        #endregion
+
+
         #region Деталь Ж38х39
-        private Document ProfileG38x39(double lengthChannel, string materialChannel = "", string colorChannel = "")
+        private Document ProfileG38x39(double lengthProfile, string materialProfile = "", string colorProfile = "")
         {
             Document oDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kPartDocumentObject, "", true);
             PartDocument oPartDoc = oDoc as PartDocument;
@@ -69,7 +140,7 @@ namespace InventorSegmentsGenerator
 
             Profile oProfile = oSketch.Profiles.AddForSolid();
             ExtrudeDefinition oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kJoinOperation);
-            oExtrudeDef.SetDistanceExtent(lengthChannel, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
+            oExtrudeDef.SetDistanceExtent(lengthProfile, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
             ExtrudeFeature oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
 
 
@@ -77,14 +148,14 @@ namespace InventorSegmentsGenerator
 
             foreach (Edge oEdge in (oExtrude.SideFaces[3].Edges))
             {
-                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthChannel) < 0.0001)
+                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthProfile) < 0.0001)
                 {
                     oEdges.Add(oEdge);
                 }
             }
             foreach (Edge oEdge in (oExtrude.SideFaces[5].Edges))
             {
-                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthChannel) < 0.0001)
+                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthProfile) < 0.0001)
                 {
                     oEdges.Add(oEdge);
                 }
@@ -97,7 +168,7 @@ namespace InventorSegmentsGenerator
             Material oMaterial = oPartDoc.ComponentDefinition.Material;
             foreach (Material mat in oPartDoc.Materials)
             {
-                if (mat.Name == materialChannel)
+                if (mat.Name == materialProfile)
                 {
                     oMaterial = mat;
                 }
@@ -107,7 +178,7 @@ namespace InventorSegmentsGenerator
             RenderStyle oRenderStyle = oPartDoc.ComponentDefinition.Material.RenderStyle;
             foreach (RenderStyle style in oPartDoc.RenderStyles)
             {
-                if (style.Name == colorChannel)
+                if (style.Name == colorProfile)
                 {
                     oRenderStyle = style;
                 }

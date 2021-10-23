@@ -30,24 +30,33 @@ namespace InventorSegmentsGenerator
 
         private void M_buttonSectionsGenerator_OnExecute(NameValueMap Context)
         {
-            ProfileA38 a38 = new ProfileA38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            ProfileA48 a48 = new ProfileA48(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            ProfileE38 e38 = new ProfileE38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            ProfileG38x39 g38x39 = new ProfileG38x39(m_inventorApplication, 2.4, "Стеклопластик", "Оранжевый");
-            ProfileAKSP5 aksp5 = new ProfileAKSP5(m_inventorApplication, 4.8, "Стеклопластик", "Оранжевый");
-            ProfileAP58 ap58 = new ProfileAP58(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            a38.createProfile();
-            a38.oDoc.DisplayName = "Швеллер А38";
-            a48.createProfile();
-            a48.oDoc.DisplayName = "Швеллер А48";
-            e38.createProfile();
-            e38.oDoc.DisplayName = "Вкладыш Е38";
-            g38x39.createProfile();
-            g38x39.oDoc.DisplayName = "Вкладыш Ж38х39";
-            aksp5.createProfile();
-            aksp5.oDoc.DisplayName = "Штифт 5х48";
-            ap58.createProfile();
-            ap58.oDoc.DisplayName = "Швеллер АП58";
+            //ProfileA38 a38 = new ProfileA38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
+            //ProfileA48 a48 = new ProfileA48(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
+            //ProfileE38 e38 = new ProfileE38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
+            //ProfileG38x39 g38x39 = new ProfileG38x39(m_inventorApplication, 2.4, "Стеклопластик", "Оранжевый");
+            //ProfileAKSP5 aksp5 = new ProfileAKSP5(m_inventorApplication, 4.8, "Стеклопластик", "Оранжевый");
+            //ProfileAP58 ap58 = new ProfileAP58(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
+            //ProfileA30 a30 = new ProfileA30(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
+            ProfileB22x3 b22x3 = new ProfileB22x3(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
+            ProfileV15 v15 = new ProfileV15(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
+            //a38.createProfile();
+            //a38.oDoc.DisplayName = "Швеллер А38";
+            //a48.createProfile();
+            //a48.oDoc.DisplayName = "Швеллер А48";
+            //e38.createProfile();
+            //e38.oDoc.DisplayName = "Вкладыш Е38";
+            //g38x39.createProfile();
+            //g38x39.oDoc.DisplayName = "Вкладыш Ж38х39";
+            //aksp5.createProfile();
+            //aksp5.oDoc.DisplayName = "Штифт 5х48";
+            //ap58.createProfile();
+            //ap58.oDoc.DisplayName = "Швеллер АП58";
+            //a30.createProfile();
+            //a30.oDoc.DisplayName = "Швеллер А30";
+            b22x3.createProfile();
+            b22x3.oDoc.DisplayName = "Труба Б22х3";
+            v15.createProfile();
+            v15.oDoc.DisplayName = "Пруток В15";
 
             //m_mainForm = new FormSectionsGenerator();
             //m_mainForm.Show();

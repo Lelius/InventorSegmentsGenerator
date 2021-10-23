@@ -1,9 +1,10 @@
 ﻿using Inventor;
 using System;
+using System.Windows.Forms;
 
 namespace InventorSegmentsGenerator
 {
-    public class ProfileA38 : ProfileFrameSection
+    public class ProfileAP58 : ProfileFrameSection
     {
         private double lengthProfile;
         private string materialProfile = "";
@@ -19,7 +20,7 @@ namespace InventorSegmentsGenerator
         private Material oMaterial;
         private RenderStyle oRenderStyle;
 
-        public ProfileA38(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
+        public ProfileAP58(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
             : base(m_inventorApplication)
         {
             this.lengthProfile = lengthProfile;
@@ -33,13 +34,13 @@ namespace InventorSegmentsGenerator
 
             point = new Point2d[8];
             point[0] = oTransGeo.CreatePoint2d(0, 0);
-            point[1] = oTransGeo.CreatePoint2d(0, 2.5);
-            point[2] = oTransGeo.CreatePoint2d(0.4, 2.5);
-            point[3] = oTransGeo.CreatePoint2d(0.4, 0.4);
-            point[4] = oTransGeo.CreatePoint2d(3.4, 0.4);
-            point[5] = oTransGeo.CreatePoint2d(3.4, 2.5);
-            point[6] = oTransGeo.CreatePoint2d(3.8, 2.5);
-            point[7] = oTransGeo.CreatePoint2d(3.8, 0);
+            point[1] = oTransGeo.CreatePoint2d(0, 3.6);
+            point[2] = oTransGeo.CreatePoint2d(0.5, 3.6);
+            point[3] = oTransGeo.CreatePoint2d(0.5, 0.5);
+            point[4] = oTransGeo.CreatePoint2d(5.3, 0.5);
+            point[5] = oTransGeo.CreatePoint2d(5.3, 3.6);
+            point[6] = oTransGeo.CreatePoint2d(5.8, 3.6);
+            point[7] = oTransGeo.CreatePoint2d(5.8, 0);
 
             oLine = new SketchLine[8];
             oLine[0] = oSketch.SketchLines.AddByTwoPoints(point[0], point[1]);
@@ -56,7 +57,6 @@ namespace InventorSegmentsGenerator
             oExtrudeDef.SetDistanceExtent(lengthProfile, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
             oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
 
-
             oEdges = oInvApp.TransientObjects.CreateEdgeCollection();
             for (int i = 1; i <= oLine.Length; i++)
             {
@@ -66,6 +66,19 @@ namespace InventorSegmentsGenerator
                     {
                         oEdges.Add(oEdge);
                     }
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[5]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                }
+            }
+            oFillet = oCompDef.Features.FilletFeatures.AddSimple(oEdges, 0.2);
+
+            oEdges = oInvApp.TransientObjects.CreateEdgeCollection();
+            for (int i = 1; i <= oLine.Length; i++)
+            {
+                foreach (Edge oEdge in (oExtrude.SideFaces[i].Edges))
+                {
                     if (isEdgeAndPoint2dOnStraight(oEdge, point[3]))
                     {
                         oEdges.Add(oEdge);
@@ -74,13 +87,9 @@ namespace InventorSegmentsGenerator
                     {
                         oEdges.Add(oEdge);
                     }
-                    if (isEdgeAndPoint2dOnStraight(oEdge, point[5]))
-                    {
-                        oEdges.Add(oEdge);
-                    }
                 }
             }
-            oFillet = oCompDef.Features.FilletFeatures.AddSimple(oEdges, 0.15);
+            oFillet = oCompDef.Features.FilletFeatures.AddSimple(oEdges, 0.3);
 
             oMaterial = oPartDoc.ComponentDefinition.Material;
             foreach (Material mat in oPartDoc.Materials)
@@ -102,5 +111,5 @@ namespace InventorSegmentsGenerator
             }
             oPartDoc.ComponentDefinition.Material.RenderStyle = oRenderStyle;
         }
-     }
+    }
 }

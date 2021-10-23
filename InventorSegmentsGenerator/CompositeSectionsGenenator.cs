@@ -34,6 +34,8 @@ namespace InventorSegmentsGenerator
             ProfileA48 a48 = new ProfileA48(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
             ProfileE38 e38 = new ProfileE38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
             ProfileG38x39 g38x39 = new ProfileG38x39(m_inventorApplication, 2.4, "Стеклопластик", "Оранжевый");
+            ProfileAKSP5 aksp5 = new ProfileAKSP5(m_inventorApplication, 4.8, "Стеклопластик", "Оранжевый");
+            ProfileAP58 ap58 = new ProfileAP58(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
             a38.createProfile();
             a38.oDoc.DisplayName = "Швеллер А38";
             a48.createProfile();
@@ -42,6 +44,10 @@ namespace InventorSegmentsGenerator
             e38.oDoc.DisplayName = "Вкладыш Е38";
             g38x39.createProfile();
             g38x39.oDoc.DisplayName = "Вкладыш Ж38х39";
+            aksp5.createProfile();
+            aksp5.oDoc.DisplayName = "Штифт 5х48";
+            ap58.createProfile();
+            ap58.oDoc.DisplayName = "Швеллер АП58";
 
             //m_mainForm = new FormSectionsGenerator();
             //m_mainForm.Show();

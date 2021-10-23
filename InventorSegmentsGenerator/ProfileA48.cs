@@ -10,7 +10,7 @@ namespace InventorSegmentsGenerator
         private string colorProfile = "";
         private PlanarSketch oSketch;
         private Point2d[] point;
-        private SketchLine[] oLines;
+        private SketchLine[] oLine;
         private Profile oProfile;
         private ExtrudeDefinition oExtrudeDef;
         private ExtrudeFeature oExtrude;
@@ -41,15 +41,15 @@ namespace InventorSegmentsGenerator
             point[6] = oTransGeo.CreatePoint2d(4.8, 3.2);
             point[7] = oTransGeo.CreatePoint2d(4.8, 0);
 
-            oLines = new SketchLine[8];
-            oLines[0] = oSketch.SketchLines.AddByTwoPoints(point[0], point[1]);
-            oLines[1] = oSketch.SketchLines.AddByTwoPoints(oLines[0].EndSketchPoint, point[2]);
-            oLines[2] = oSketch.SketchLines.AddByTwoPoints(oLines[1].EndSketchPoint, point[3]);
-            oLines[3] = oSketch.SketchLines.AddByTwoPoints(oLines[2].EndSketchPoint, point[4]);
-            oLines[4] = oSketch.SketchLines.AddByTwoPoints(oLines[3].EndSketchPoint, point[5]);
-            oLines[5] = oSketch.SketchLines.AddByTwoPoints(oLines[4].EndSketchPoint, point[6]);
-            oLines[6] = oSketch.SketchLines.AddByTwoPoints(oLines[5].EndSketchPoint, point[7]);
-            oLines[7] = oSketch.SketchLines.AddByTwoPoints(oLines[6].EndSketchPoint, oLines[0].StartSketchPoint);
+            oLine = new SketchLine[8];
+            oLine[0] = oSketch.SketchLines.AddByTwoPoints(point[0], point[1]);
+            oLine[1] = oSketch.SketchLines.AddByTwoPoints(oLine[0].EndSketchPoint, point[2]);
+            oLine[2] = oSketch.SketchLines.AddByTwoPoints(oLine[1].EndSketchPoint, point[3]);
+            oLine[3] = oSketch.SketchLines.AddByTwoPoints(oLine[2].EndSketchPoint, point[4]);
+            oLine[4] = oSketch.SketchLines.AddByTwoPoints(oLine[3].EndSketchPoint, point[5]);
+            oLine[5] = oSketch.SketchLines.AddByTwoPoints(oLine[4].EndSketchPoint, point[6]);
+            oLine[6] = oSketch.SketchLines.AddByTwoPoints(oLine[5].EndSketchPoint, point[7]);
+            oLine[7] = oSketch.SketchLines.AddByTwoPoints(oLine[6].EndSketchPoint, oLine[0].StartSketchPoint);
 
             oProfile = oSketch.Profiles.AddForSolid();
             oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kJoinOperation);
@@ -57,15 +57,27 @@ namespace InventorSegmentsGenerator
             oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
 
             oEdges = oInvApp.TransientObjects.CreateEdgeCollection();
-            foreach (Edge oEdge in (oExtrude.SideFaces[4].Edges))
+            for (int i = 1; i <= oLine.Length; i++)
             {
-                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthProfile) < 0.0001)
-                    oEdges.Add(oEdge);
-            }
-            foreach (Edge oEdge in (oExtrude.SideFaces[6].Edges))
-            {
-                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthProfile) < 0.0001)
-                    oEdges.Add(oEdge);
+                foreach (Edge oEdge in (oExtrude.SideFaces[i].Edges))
+                {
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[2]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[3]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[4]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[5]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                }
             }
             oFillet = oCompDef.Features.FilletFeatures.AddSimple(oEdges, 0.15);
 

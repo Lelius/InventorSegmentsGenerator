@@ -133,6 +133,8 @@
     </Compile>
     <Compile Include="ProfileA38.cs" />
     <Compile Include="ProfileA48.cs" />
+    <Compile Include="ProfileAKSP5.cs" />
+    <Compile Include="ProfileAP58.cs" />
     <Compile Include="ProfileE38.cs" />
     <Compile Include="ProfileFrameSection.cs" />
     <Compile Include="ProfileG38x39.cs" />

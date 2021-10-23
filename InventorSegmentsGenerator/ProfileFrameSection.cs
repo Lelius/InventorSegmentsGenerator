@@ -1,4 +1,5 @@
 ﻿using Inventor;
+using System;
 
 namespace InventorSegmentsGenerator
 {
@@ -19,6 +20,17 @@ namespace InventorSegmentsGenerator
             oTransGeo = oInvApp.TransientGeometry;
 
             oDoc.UnitsOfMeasure.LengthUnits = UnitsTypeEnum.kMillimeterLengthUnits;
+        }
+
+        protected bool isEdgeAndPoint2dOnStraight(Edge edge, Point2d point)
+        {
+            if (Math.Abs(edge.StartVertex.Point.X - point.X) < 0.0000001)
+                if (Math.Abs(edge.StartVertex.Point.Y - point.Y) < 0.0000001)
+                    if (Math.Abs(edge.StopVertex.Point.X - point.X) < 0.0000001)
+                        if (Math.Abs(edge.StopVertex.Point.Y - point.Y) < 0.0000001)
+                            return true;
+
+            return false;
         }
     }
 }

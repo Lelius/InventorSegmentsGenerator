@@ -11,7 +11,7 @@ namespace InventorSegmentsGenerator
         private PlanarSketch oSketch;
         private Point2d[] point;
         private Point2d pointCenter;
-        private SketchLine[] oLines;
+        private SketchLine[] oLine;
         private SketchCircle oCircle;
         private Profile oProfile;
         private ExtrudeDefinition oExtrudeDef;
@@ -40,11 +40,11 @@ namespace InventorSegmentsGenerator
             point[3] = oTransGeo.CreatePoint2d(3.9, 0);
             pointCenter = oTransGeo.CreatePoint2d(1.95, 1.9);
 
-            oLines = new SketchLine[4];
-            oLines[0] = oSketch.SketchLines.AddByTwoPoints(point[0], point[1]);
-            oLines[1] = oSketch.SketchLines.AddByTwoPoints(oLines[0].EndSketchPoint, point[2]);
-            oLines[2] = oSketch.SketchLines.AddByTwoPoints(oLines[1].EndSketchPoint, point[3]);
-            oLines[3] = oSketch.SketchLines.AddByTwoPoints(oLines[2].EndSketchPoint, oLines[0].StartSketchPoint);
+            oLine = new SketchLine[4];
+            oLine[0] = oSketch.SketchLines.AddByTwoPoints(point[0], point[1]);
+            oLine[1] = oSketch.SketchLines.AddByTwoPoints(oLine[0].EndSketchPoint, point[2]);
+            oLine[2] = oSketch.SketchLines.AddByTwoPoints(oLine[1].EndSketchPoint, point[3]);
+            oLine[3] = oSketch.SketchLines.AddByTwoPoints(oLine[2].EndSketchPoint, oLine[0].StartSketchPoint);
             oCircle = oSketch.SketchCircles.AddByCenterRadius(pointCenter, 1.125);
 
             oProfile = oSketch.Profiles.AddForSolid();
@@ -53,25 +53,29 @@ namespace InventorSegmentsGenerator
             oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
 
             oEdges = oInvApp.TransientObjects.CreateEdgeCollection();
-
-            foreach (Edge oEdge in (oExtrude.SideFaces[3].Edges))
+            for (int i = 1; i <= oLine.Length; i++)
             {
-                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthProfile) < 0.0001)
+                foreach (Edge oEdge in (oExtrude.SideFaces[i].Edges))
                 {
-                    oEdges.Add(oEdge);
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[0]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[1]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[2]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
+                    if (isEdgeAndPoint2dOnStraight(oEdge, point[3]))
+                    {
+                        oEdges.Add(oEdge);
+                    }
                 }
             }
-            foreach (Edge oEdge in (oExtrude.SideFaces[5].Edges))
-            {
-                if (Math.Abs(oEdge.StartVertex.Point.DistanceTo(oEdge.StopVertex.Point) - lengthProfile) < 0.0001)
-                {
-                    oEdges.Add(oEdge);
-                }
-            }
-            if (oEdges.Count > 0)
-            {
-                oFillet = oCompDef.Features.FilletFeatures.AddSimple(oEdges, 0.15);
-            }
+            oFillet = oCompDef.Features.FilletFeatures.AddSimple(oEdges, 0.2);
 
             oMaterial = oPartDoc.ComponentDefinition.Material;
             foreach (Material mat in oPartDoc.Materials)

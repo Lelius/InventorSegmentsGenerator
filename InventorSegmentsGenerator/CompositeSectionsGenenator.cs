@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Inventor;
+using System.IO;
 using System;
 
 namespace InventorSegmentsGenerator
@@ -30,37 +31,87 @@ namespace InventorSegmentsGenerator
 
         private void M_buttonSectionsGenerator_OnExecute(NameValueMap Context)
         {
+            string projectPath = System.Environment.ExpandEnvironmentVariables("%USERPROFILE%\\Desktop\\Section\\");
+            string projectName = "Section";
+            DesignProject oProject;
+
+            oProject = createAndAcivateProject(m_inventorApplication, projectName, projectPath);
+
+            //AssemblyDocument oAssDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "") as AssemblyDocument; 
+            //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
+
+            PillarPartA48 pillarPartA48 = new PillarPartA48(m_inventorApplication);
+            pillarPartA48.createPillarPart();
+
+
+            //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);
+            //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
             //ProfileA38 a38 = new ProfileA38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            //ProfileA48 a48 = new ProfileA48(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            //ProfileE38 e38 = new ProfileE38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            //ProfileG38x39 g38x39 = new ProfileG38x39(m_inventorApplication, 2.4, "Стеклопластик", "Оранжевый");
-            //ProfileAKSP5 aksp5 = new ProfileAKSP5(m_inventorApplication, 4.8, "Стеклопластик", "Оранжевый");
-            //ProfileAP58 ap58 = new ProfileAP58(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            //ProfileA30 a30 = new ProfileA30(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            ProfileB22x3 b22x3 = new ProfileB22x3(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            ProfileV15 v15 = new ProfileV15(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
             //a38.createProfile();
             //a38.oDoc.DisplayName = "Швеллер А38";
-            //a48.createProfile();
-            //a48.oDoc.DisplayName = "Швеллер А48";
-            //e38.createProfile();
-            //e38.oDoc.DisplayName = "Вкладыш Е38";
-            //g38x39.createProfile();
-            //g38x39.oDoc.DisplayName = "Вкладыш Ж38х39";
-            //aksp5.createProfile();
-            //aksp5.oDoc.DisplayName = "Штифт 5х48";
-            //ap58.createProfile();
-            //ap58.oDoc.DisplayName = "Швеллер АП58";
-            //a30.createProfile();
-            //a30.oDoc.DisplayName = "Швеллер А30";
-            b22x3.createProfile();
-            b22x3.oDoc.DisplayName = "Труба Б22х3";
-            v15.createProfile();
-            v15.oDoc.DisplayName = "Пруток В15";
+
+
 
             //m_mainForm = new FormSectionsGenerator();
             //m_mainForm.Show();
         }
+
+        #region Создание и активация проекта
+        private DesignProject createAndAcivateProject(Inventor.Application invApp, string projectName, string projectPath)
+        {
+            string projectFullPath = projectPath + projectName + ".ipj";
+            DesignProjectManager oDesignProjectManager = invApp.DesignProjectManager;
+            DesignProject oProject;
+
+            if (projectName == ""| projectPath == "")
+            {
+                return null;
+            }
+
+            if (invApp.Documents.Count > 0)
+            {
+                MessageBox.Show("Для изменения активного проекта все текущие документы должны быть закрыты.");
+                return null;
+            }
+
+            foreach (DesignProject oPr in oDesignProjectManager.DesignProjects)
+            {
+                if (oPr.Name == projectName)
+                {
+                    if (oPr.FullFileName == projectFullPath)
+                    {
+                        oPr.Activate();
+                        return oPr;
+                    }
+                    else
+                    {
+                        MessageBox.Show(oPr.FullFileName + " - " + projectFullPath);
+                        MessageBox.Show("Другой проект с данным именем уже существует!");
+                        return null;
+                    }
+                }
+            }
+
+            if (System.IO.File.Exists(projectFullPath) == true)
+            {
+                oProject = invApp.DesignProjectManager.DesignProjects.AddExisting(projectFullPath);
+                oProject.Activate();
+                oDesignProjectManager = invApp.DesignProjectManager;
+                return oProject;
+            }
+            else if (System.IO.File.Exists(projectFullPath) == false)
+            {
+                if (!Directory.Exists(projectPath))
+                    Directory.CreateDirectory(projectPath);
+                oProject = invApp.DesignProjectManager.DesignProjects.Add(MultiUserModeEnum.kSingleUserMode, projectName, projectPath);
+                oProject.Activate();
+                oDesignProjectManager = invApp.DesignProjectManager;
+                return oProject;
+            }
+            else
+                return null;
+        }
+        #endregion
 
 
         #region Создание кнопки Ribbon "Генератор секций"

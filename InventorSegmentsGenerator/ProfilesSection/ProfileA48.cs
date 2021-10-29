@@ -5,19 +5,19 @@ namespace InventorSegmentsGenerator
 {
     public class ProfileA48 : ProfileFrameSection
     {
-        private double lengthProfile;
-        private string materialProfile = "";
-        private string colorProfile = "";
-        private PlanarSketch oSketch;
-        private Point2d[] point;
-        private SketchLine[] oLine;
-        private Profile oProfile;
-        private ExtrudeDefinition oExtrudeDef;
-        private ExtrudeFeature oExtrude;
-        private EdgeCollection oEdges;
-        private FilletFeature oFillet;
-        private Material oMaterial;
-        private RenderStyle oRenderStyle;
+        public double lengthProfile;
+        public string materialProfile = "";
+        public string colorProfile = "";
+        protected PlanarSketch oSketch;
+        protected Point2d[] point;
+        protected SketchLine[] oLine;
+        protected Profile oProfile;
+        protected ExtrudeDefinition oExtrudeDef;
+        protected ExtrudeFeature oExtrude;
+        protected EdgeCollection oEdges;
+        protected FilletFeature oFillet;
+        protected Material oMaterial;
+        protected RenderStyle oRenderStyle;
 
         public ProfileA48(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
             : base(m_inventorApplication)

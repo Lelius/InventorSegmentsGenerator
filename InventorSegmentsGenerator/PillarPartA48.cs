@@ -44,12 +44,39 @@ namespace InventorSegmentsGenerator
         {
             createProfile();
             createHole();
+            createAngleCut();
+        }
+
+
+        private void createAngleCut()
+        {
+            if (Math.Abs(basicAngle) < 0.0000001)
+            {
+                return;
+            }
+            else if (basicAngle > 0)
+            {
+
+            }
+            else if (basicAngle < 0)
+            {
+
+            }
         }
 
 
         private void createHole()
         {
-            oFrontFace = oExtrude.SideFaces[4];
+            foreach (Face oF in oExtrude.SideFaces)
+            {
+                Box2d box = oF.Evaluator.ParamRangeRect;
+
+                if (box.MinPoint.X == point[0].X)
+                    if (box.MinPoint.Y == point[0].Y)
+                        if (box.MaxPoint.X == 4.8)
+                            if (box.MaxPoint.Y == heightPillar)
+                                oFrontFace = oF;
+            }
 
             for (int i = 1; i <= distanceToHoles.Count; i++)
             {
@@ -67,7 +94,7 @@ namespace InventorSegmentsGenerator
                         oProfPath.Delete();
                 }
                 oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kCutOperation);
-                oExtrudeDef.SetDistanceExtent(1, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
+                oExtrudeDef.SetDistanceExtent(0.5, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
                 oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
             }
         }

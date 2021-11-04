@@ -43,29 +43,85 @@ namespace InventorSegmentsGenerator
         public void createPillarPart()
         {
             createProfile();
-            createHole();
+            createBoltHoles();
+            basicAngle = -30;
             createAngleCut();
         }
 
 
         private void createAngleCut()
         {
+            double cathe = Math.Abs(oLine[0].Length * Math.Tan(basicAngle * Math.PI / 180)); //угол в радианах
+
             if (Math.Abs(basicAngle) < 0.0000001)
             {
                 return;
             }
             else if (basicAngle > 0)
             {
+                ExtrudeFeature extrudeFeature = oCompDef.Features.ExtrudeFeatures["Выдавливание1"];
+                extrudeFeature.Definition.SetDistanceExtent(heightPillar + cathe, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
 
+                foreach (Face oF in extrudeFeature.SideFaces)
+                {
+                    Point wPoint = oF.PointOnFace;
+                    if (wPoint.X == point[6].X)
+                    {
+                        Point sketchPoint = oTransGeo.CreatePoint(point[6].X, 0, 0);
+                        oSketch = oCompDef.Sketches.AddWithOrientation(oF, oF.Edges[1], true, true, oF.Edges[1].StartVertex);
+
+                        Point2d[] wP = new Point2d[3];
+                        SketchLine[] wL = new SketchLine[3];
+
+                        wP[0] = oTransGeo.CreatePoint2d(0, 0);
+                        wP[1] = oTransGeo.CreatePoint2d(3.2, cathe);
+                        wP[2] = oTransGeo.CreatePoint2d(3.2, 0);
+
+                        wL[0] = oSketch.SketchLines.AddByTwoPoints(wP[0], wP[1]);
+                        wL[1] = oSketch.SketchLines.AddByTwoPoints(wL[0].EndSketchPoint, wP[2]);
+                        wL[2] = oSketch.SketchLines.AddByTwoPoints(wL[1].EndSketchPoint, wL[0].StartSketchPoint);
+
+                        oProfile = oSketch.Profiles.AddForSolid();
+                        oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kCutOperation);
+                        oExtrudeDef.SetDistanceExtent(oLine[7].Length, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
+                        oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
+                    }
+                }
             }
             else if (basicAngle < 0)
             {
+                ExtrudeFeature extrudeFeature = oCompDef.Features.ExtrudeFeatures["Выдавливание1"];
 
+                foreach (Face oF in extrudeFeature.SideFaces)
+                {
+                    Point wPoint = oF.PointOnFace;
+                    if (wPoint.X == point[6].X)
+                    {
+                        Point sketchPoint = oTransGeo.CreatePoint(point[6].X, 0, 0);
+                        oSketch = oCompDef.Sketches.AddWithOrientation(oF, oF.Edges[1], true, true, oF.Edges[1].StartVertex);
+
+                        Point2d[] wP = new Point2d[3];
+                        SketchLine[] wL = new SketchLine[3];
+
+                        wP[0] = oTransGeo.CreatePoint2d(0, 0);
+                        wP[1] = oTransGeo.CreatePoint2d(0, cathe);
+                        wP[2] = oTransGeo.CreatePoint2d(3.2, 0);
+
+                        wL[0] = oSketch.SketchLines.AddByTwoPoints(wP[0], wP[1]);
+                        wL[1] = oSketch.SketchLines.AddByTwoPoints(wL[0].EndSketchPoint, wP[2]);
+                        wL[2] = oSketch.SketchLines.AddByTwoPoints(wL[1].EndSketchPoint, wL[0].StartSketchPoint);
+
+                        oProfile = oSketch.Profiles.AddForSolid();
+                        oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kCutOperation);
+                        oExtrudeDef.SetDistanceExtent(oLine[7].Length, PartFeatureExtentDirectionEnum.kNegativeExtentDirection);
+                        oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
+                    }
+                }
             }
         }
 
 
-        private void createHole()
+        private void createBoltHoles()
         {
             foreach (Face oF in oExtrude.SideFaces)
             {

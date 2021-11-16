@@ -52,8 +52,6 @@ namespace InventorSegmentsGenerator
 
         public void createPillarPart()
         {
-            basicAngle = 25;
-            typeOfFastening = TypeOfFastening.Ground;
             createProfile();
             createAngleCut();
             createBoltHoles();

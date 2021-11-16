@@ -8,12 +8,12 @@ namespace InventorSegmentsGenerator
         private double lengthProfile;
         private string materialProfile = "";
         private string colorProfile = "";
-        private PlanarSketch oSketch;
-        private Point2d[] point;
-        private SketchLine[] oLine;
-        private Profile oProfile;
-        private ExtrudeDefinition oExtrudeDef;
-        private ExtrudeFeature oExtrude;
+        private protected PlanarSketch oSketch;
+        private protected Point2d[] point;
+        private protected SketchLine[] oLine;
+        private protected Profile oProfile;
+        private protected ExtrudeDefinition oExtrudeDef;
+        private protected ExtrudeFeature oExtrude;
         private EdgeCollection oEdges;
         private FilletFeature oFillet;
         private Material oMaterial;

@@ -42,6 +42,8 @@ namespace InventorSegmentsGenerator
 
             PillarPartA48 pillarPartA48 = new PillarPartA48(m_inventorApplication);
             pillarPartA48.createPillarPart();
+            PillarPartA38 pillarPartA38 = new PillarPartA38(m_inventorApplication);
+            pillarPartA38.createPillarPart();
 
 
             //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);

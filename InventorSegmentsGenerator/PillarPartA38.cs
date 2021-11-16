@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inventor;
-using System.Windows.Forms;
 
 namespace InventorSegmentsGenerator
 {
-    public class PillarPartA48 : ProfileA48
+    public class PillarPartA38 : ProfileA38
     {
-        const double HeightProfile = 3.2;
+        const double HeightProfile = 2.5;
         public enum TypeOfFastening { Boot, Ground, Rack }
 
         private double basicAngle;
@@ -26,19 +25,19 @@ namespace InventorSegmentsGenerator
 
         protected Face oFrontFace;
 
-        public PillarPartA48(Inventor.Application invApp) : base(invApp, 120, "Стеклопластик", "Оранжевый")
+        public PillarPartA38(Inventor.Application invApp) : base(invApp, 120, "Стеклопластик", "Оранжевый")
         {
             heightPillar = 120;
             numberOfHoles = 3;
-            distanceToHoles = new Dictionary<int, double> { { 1, 3.6}, { 2, 45}, { 3, 95} };
+            distanceToHoles = new Dictionary<int, double> { { 1, 3.6 }, { 2, 45 }, { 3, 95 } };
             typeOfFastening = TypeOfFastening.Boot;
             holeBoltDiametr = 0.9;
             holeGroundDiametr = 0.52;
             basicAngle = 0;
         }
 
-        public PillarPartA48(Inventor.Application invApp, double heightPillar, string materialProfile, string colorProfile, TypeOfFastening typeOfFastening) :
-            base (invApp, heightPillar, materialProfile, colorProfile)
+        public PillarPartA38(Inventor.Application invApp, double heightPillar, string materialProfile, string colorProfile, TypeOfFastening typeOfFastening) :
+            base(invApp, heightPillar, materialProfile, colorProfile)
 
         {
             this.heightPillar = heightPillar;
@@ -139,8 +138,8 @@ namespace InventorSegmentsGenerator
                         SketchLine[] wL = new SketchLine[3];
 
                         wP[0] = oTransGeo.CreatePoint2d(0, 0);
-                        wP[1] = oTransGeo.CreatePoint2d(3.2, getCathe(BasicAngle));
-                        wP[2] = oTransGeo.CreatePoint2d(3.2, 0);
+                        wP[1] = oTransGeo.CreatePoint2d(2.5, getCathe(BasicAngle));
+                        wP[2] = oTransGeo.CreatePoint2d(2.5, 0);
 
                         wL[0] = oSketch.SketchLines.AddByTwoPoints(wP[0], wP[1]);
                         wL[1] = oSketch.SketchLines.AddByTwoPoints(wL[0].EndSketchPoint, wP[2]);
@@ -170,7 +169,7 @@ namespace InventorSegmentsGenerator
 
                         wP[0] = oTransGeo.CreatePoint2d(0, 0);
                         wP[1] = oTransGeo.CreatePoint2d(0, getCathe(BasicAngle));
-                        wP[2] = oTransGeo.CreatePoint2d(3.2, 0);
+                        wP[2] = oTransGeo.CreatePoint2d(2.5, 0);
 
                         wL[0] = oSketch.SketchLines.AddByTwoPoints(wP[0], wP[1]);
                         wL[1] = oSketch.SketchLines.AddByTwoPoints(wL[0].EndSketchPoint, wP[2]);
@@ -193,7 +192,7 @@ namespace InventorSegmentsGenerator
             foreach (Face oF in extrudeFeature.SideFaces)
             {
                 Point wPoint = oF.PointOnFace;
-                if(wPoint.Y == 0.0)
+                if (wPoint.Y == 0.0)
                 {
                     oFrontFace = oF;
                 }

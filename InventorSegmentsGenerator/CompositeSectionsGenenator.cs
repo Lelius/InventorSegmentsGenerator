@@ -42,11 +42,8 @@ namespace InventorSegmentsGenerator
 
             PillarPartA48 pillarPartA48 = new PillarPartA48(m_inventorApplication);
             pillarPartA48.createPillarPart();
-            PillarPartA38 pillarPartA38 = new PillarPartA38(m_inventorApplication);
-            pillarPartA38.createPillarPart();
-            ProfileG38x39 g38X39 = new ProfileG38x39(m_inventorApplication, 10, "Стеклопластик", "Оранжевый");
-            g38X39.createProfile();
-
+            ProfileB30x7_3 profileB30X7_3 = new ProfileB30x7_3(m_inventorApplication, 20);
+            profileB30X7_3.createProfile();
 
             //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);
             //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();

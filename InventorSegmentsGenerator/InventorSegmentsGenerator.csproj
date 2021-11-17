@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="PillarPartA38.cs" />
     <Compile Include="PillarPartA48.cs" />
+    <Compile Include="ProfileB30x7-3.cs" />
     <Compile Include="ProfilesSection\ProfileA30.cs" />
     <Compile Include="ProfilesSection\ProfileA38.cs" />
     <Compile Include="ProfilesSection\ProfileA48.cs" />

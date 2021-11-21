@@ -40,10 +40,16 @@ namespace InventorSegmentsGenerator
             //AssemblyDocument oAssDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "") as AssemblyDocument; 
             //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
 
-            PillarPartA48 pillarPartA48 = new PillarPartA48(m_inventorApplication);
-            pillarPartA48.createPillarPart();
-            ProfileB30x7_3 profileB30X7_3 = new ProfileB30x7_3(m_inventorApplication, 20);
-            profileB30X7_3.createProfile();
+            //PillarPartA48 pillarPartA48 = new PillarPartA48(m_inventorApplication);
+            //pillarPartA48.createPillarPart();
+            //ProfileB30x7_3 profileB30X7_3 = new ProfileB30x7_3(m_inventorApplication, 20);
+            //profileB30X7_3.createProfile();
+
+            PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
+            pillarPart.BasicAngle = 25;
+            pillarPart.createPillarPart();
+            CrossbarPartA48 crossbarPart = new CrossbarPartA48(m_inventorApplication, 20);
+            crossbarPart.createCrossbarPart();
 
             //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);
             //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();

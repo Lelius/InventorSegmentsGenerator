@@ -1,4 +1,6 @@
-﻿using Inventor;
+﻿// TODO: объединить в один класс трубного профиля
+
+using Inventor;
 
 namespace InventorSegmentsGenerator
 {

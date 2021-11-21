@@ -36,7 +36,7 @@ namespace InventorSegmentsGenerator
             CompositeSectionsGenenator myGenerator = new CompositeSectionsGenenator(m_inventorApplication);
             myGenerator.MainGenerator();
 
-            // TODO: Add ApplicationAddInServer.Activate implementation.
+            // Add ApplicationAddInServer.Activate implementation.
             // e.g. event initialization, command creation etc.
         }
 
@@ -46,7 +46,7 @@ namespace InventorSegmentsGenerator
             // The AddIn will be unloaded either manually by the user or
             // when the Inventor session is terminated
 
-            // TODO: Add ApplicationAddInServer.Deactivate implementation
+            // Add ApplicationAddInServer.Deactivate implementation
 
             // Release objects.
             m_inventorApplication = null;
@@ -70,7 +70,7 @@ namespace InventorSegmentsGenerator
 
             get
             {
-                // TODO: Add ApplicationAddInServer.Automation getter implementation
+                // Add ApplicationAddInServer.Automation getter implementation
                 return null;
             }
         }

@@ -3,6 +3,15 @@ using System;
 
 namespace InventorSegmentsGenerator
 {
+    ///<summary>
+    ///Класс, создающий деталь Швеллер А38
+    ///</summary>
+    ///<param name = "m_inventorApplication" > Это главный Inventor.Application объект</param>
+    ///<param name = "lengthProfile" > Длина формируемой детали (в см)</param>
+    ///<param name = "materialProfile" > Материал детали (необязательно)</param>
+    ///<param name = "colorProfile" > Цвет детали (необязательно)</param>
+    ///<returns></returns>
+    ///<remarks></remarks>
     public class ProfileA38 : ProfileFrameSection
     {
         private double lengthProfile;

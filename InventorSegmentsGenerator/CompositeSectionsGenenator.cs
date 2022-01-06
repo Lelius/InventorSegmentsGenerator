@@ -49,6 +49,7 @@ namespace InventorSegmentsGenerator
             pillarPart.BasicAngle = 25;
             pillarPart.createPillarPart();
             CrossbarPartA48 crossbarPart = new CrossbarPartA48(m_inventorApplication, 20);
+            crossbarPart.BasicAngle = 25;
             crossbarPart.createCrossbarPart();
 
             //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);

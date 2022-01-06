@@ -37,7 +37,6 @@ namespace InventorSegmentsGenerator
         public void createCrossbarPart()
         {
             createProfile();
-            BasicAngle = 25;
             createSpikes();
         }
 
@@ -49,7 +48,7 @@ namespace InventorSegmentsGenerator
             WorkPoint oWorkPointOne = oCompDef.WorkPoints.AddFixed(oPointOne, true);
             WorkPoint oWorkPointTwo = oCompDef.WorkPoints.AddFixed(oPointTwo, true);
             WorkAxis oWorkAxisCrossbar = oCompDef.WorkAxes.AddByTwoPoints(oWorkPointOne, oWorkPointTwo, true);
-            WorkPlane oWorkPlaneCrossbar = oCompDef.WorkPlanes.AddByLinePlaneAndAngle(oWorkAxisCrossbar, oCompDef.WorkPlanes["Плоскость XZ"], BasicAngle, true);
+            WorkPlane oWorkPlaneCrossbar = oCompDef.WorkPlanes.AddByLinePlaneAndAngle(oWorkAxisCrossbar, oCompDef.WorkPlanes["Плоскость XZ"], "-" + BasicAngle.ToString() + " deg", true);
 
             oSketchSpikesNear = oCompDef.Sketches.AddWithOrientation(oWorkPlaneCrossbar, oWorkAxisCrossbar, true, true, oWorkPointOne);
 
@@ -87,16 +86,17 @@ namespace InventorSegmentsGenerator
             oSketchSpikesFar = oCompDef.Sketches.AddWithOrientation(oWorkPlaneCrossbar, oWorkAxisCrossbar, true, true, oWorkPointOne);
 
             oPointsFar = new Point2d[10];
+            double lengthCrossbarProection = lengthCrossbar * Math.Cos(BasicAngle * Math.PI / 180);
             oPointsFar[0] = oTransGeo.CreatePoint2d(0, lengthCrossbar + 10);
             oPointsFar[1] = oTransGeo.CreatePoint2d(4.8, lengthCrossbar + 10);
-            oPointsFar[2] = oTransGeo.CreatePoint2d(4.8, lengthCrossbar - 2.7);
-            oPointsFar[3] = oTransGeo.CreatePoint2d(4.3, lengthCrossbar - 2.7);
-            oPointsFar[4] = oTransGeo.CreatePoint2d(4.3, lengthCrossbar - 0.5);
-            oPointsFar[5] = oTransGeo.CreatePoint2d(3.8, lengthCrossbar);
-            oPointsFar[6] = oTransGeo.CreatePoint2d(1, lengthCrossbar);
-            oPointsFar[7] = oTransGeo.CreatePoint2d(0.5, lengthCrossbar - 0.5);
-            oPointsFar[8] = oTransGeo.CreatePoint2d(0.5, lengthCrossbar - 2.7);
-            oPointsFar[9] = oTransGeo.CreatePoint2d(0, lengthCrossbar - 2.7);
+            oPointsFar[2] = oTransGeo.CreatePoint2d(4.8, lengthCrossbarProection - 2.7);
+            oPointsFar[3] = oTransGeo.CreatePoint2d(4.3, lengthCrossbarProection - 2.7);
+            oPointsFar[4] = oTransGeo.CreatePoint2d(4.3, lengthCrossbarProection - 0.5);
+            oPointsFar[5] = oTransGeo.CreatePoint2d(3.8, lengthCrossbarProection);
+            oPointsFar[6] = oTransGeo.CreatePoint2d(1, lengthCrossbarProection);
+            oPointsFar[7] = oTransGeo.CreatePoint2d(0.5, lengthCrossbarProection - 0.5);
+            oPointsFar[8] = oTransGeo.CreatePoint2d(0.5, lengthCrossbarProection - 2.7);
+            oPointsFar[9] = oTransGeo.CreatePoint2d(0, lengthCrossbarProection - 2.7);
 
             oLinesFar = new SketchLine[10];
             oLinesFar[0] = oSketchSpikesFar.SketchLines.AddByTwoPoints(oPointsFar[0], oPointsFar[1]);
@@ -110,6 +110,8 @@ namespace InventorSegmentsGenerator
             oLinesFar[7] = oSketchSpikesFar.SketchLines.AddByTwoPoints(oLinesFar[6].EndSketchPoint, oPointsFar[8]);
             oLinesFar[8] = oSketchSpikesFar.SketchLines.AddByTwoPoints(oLinesFar[7].EndSketchPoint, oPointsFar[9]);
             oLinesFar[9] = oSketchSpikesFar.SketchLines.AddByTwoPoints(oLinesFar[8].EndSketchPoint, oLinesFar[0].StartSketchPoint);
+
+            oSketchSpikesFar.AddByProjectingEntity(oLinesNear[3]);
 
             oProfile = oSketchSpikesFar.Profiles.AddForSolid();
             oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kCutOperation);

@@ -13,7 +13,7 @@ namespace InventorSegmentsGenerator
             get { return basicAngle; }
             set { basicAngle = value; }
         }
-        public Dictionary<int, double> distanceToHoles;
+        public List<double> distanceToHoles;
         public double holeDiametr;
 
         protected Point2d[] oPointsNear;
@@ -24,12 +24,14 @@ namespace InventorSegmentsGenerator
         protected SketchLine[] oLinesFar;
         protected PlanarSketch oSketchSpikesFar;
 
+        protected PlanarSketch oSketchHoles;
+
         public CrossbarPartA48(Inventor.Application InvApp, double lengthCrossbar) : 
             base (InvApp, lengthCrossbar + 10, "Стеклопластик", "Оранжевый")                    // + 100 мм на случай наклонной перекладины
         {
             this.lengthCrossbar = lengthCrossbar;
             BasicAngle = 0;
-            distanceToHoles = null;
+            distanceToHoles = new List<double>();
             holeDiametr = 2.25;
         }
 
@@ -38,6 +40,42 @@ namespace InventorSegmentsGenerator
         {
             createProfile();
             createSpikes();
+            distanceToHoles.Add(7);
+            distanceToHoles.Add(13);
+            createHoles();
+        }
+
+
+        public void createHoles()
+        {
+            WorkPoint oWorkDeltaOriginPoint = null;
+
+            foreach (Face oF in oCompDef.Features.ExtrudeFeatures[2].Faces)
+            {
+                foreach (Vertex oVer in oF.Vertices)
+                {
+                    if (oVer.Point.X == 0 & oVer.Point.Y == 0)
+                    {
+                        oWorkDeltaOriginPoint = oCompDef.WorkPoints.AddFixed(oVer.Point, true);
+                    }
+                }
+            }
+
+            if (oWorkDeltaOriginPoint == null)
+                return;
+            if (distanceToHoles.Count < 1)
+                return;
+
+            oSketchHoles = oCompDef.Sketches.AddWithOrientation(oCompDef.WorkPlanes["Плоскость XZ"], oCompDef.WorkAxes["Ось Z"], true, true, oWorkDeltaOriginPoint, false);
+            foreach(double dist in distanceToHoles)
+            {
+                Point2d oPoint = oTransGeo.CreatePoint2d((- dist), 2.4);
+                SketchCircle oCircle = oSketchHoles.SketchCircles.AddByCenterRadius(oPoint, holeDiametr / 2.0);
+            }
+            oProfile = oSketchHoles.Profiles.AddForSolid();
+            oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kCutOperation);
+            oExtrudeDef.SetThroughAllExtent(PartFeatureExtentDirectionEnum.kSymmetricExtentDirection);
+            oExtrude = oCompDef.Features.ExtrudeFeatures.Add(oExtrudeDef);
         }
 
 

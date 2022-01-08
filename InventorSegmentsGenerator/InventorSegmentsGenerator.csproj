@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="CompositeSection.cs" />
     <Compile Include="CompositeSectionsGenenator.cs" />
+    <Compile Include="CrossbarPartA38.cs" />
     <Compile Include="CrossbarPartA48.cs" />
     <Compile Include="FormSectionsGenerator.cs">
       <SubType>Form</SubType>

@@ -2,6 +2,7 @@
 using Inventor;
 using System.IO;
 using System;
+using System.Collections.Generic;
 
 namespace InventorSegmentsGenerator
 {
@@ -13,6 +14,7 @@ namespace InventorSegmentsGenerator
         ButtonDefinition m_buttonSectionsGenerator;
         ButtonIcons m_buttonIcons;
         FormSectionsGenerator m_mainForm;
+        List<double> distanceToHoles = new List<double>();
 
         public CompositeSectionsGenenator(Inventor.Application m_inventorApplication)
         {
@@ -48,10 +50,19 @@ namespace InventorSegmentsGenerator
             PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
             pillarPart.BasicAngle = 25;
             pillarPart.createPillarPart();
-            CrossbarPartA48 crossbarPart = new CrossbarPartA48(m_inventorApplication, 20);
-            crossbarPart.BasicAngle = 25;
-            crossbarPart.createCrossbarPart();
 
+            distanceToHoles.Add(7);
+            distanceToHoles.Add(13);
+
+            CrossbarPartA48 crossbarPartA48 = new CrossbarPartA48(m_inventorApplication, 20);
+            crossbarPartA48.BasicAngle = 25;
+            crossbarPartA48.distanceToHoles = this.distanceToHoles;
+            crossbarPartA48.createCrossbarPart();
+
+            CrossbarPartA38 crossbarPartA38 = new CrossbarPartA38(m_inventorApplication, 20);
+            crossbarPartA38.BasicAngle = 25;
+            crossbarPartA38.distanceToHoles = this.distanceToHoles;
+            crossbarPartA38.createCrossbarPart();
             //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);
             //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
             //ProfileA38 a38 = new ProfileA38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");

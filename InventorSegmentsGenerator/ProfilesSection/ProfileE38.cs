@@ -12,8 +12,8 @@ namespace InventorSegmentsGenerator
         private Point2d[] point;
         private SketchLine[] oLine;
         private Profile oProfile;
-        private ExtrudeDefinition oExtrudeDef;
-        private ExtrudeFeature oExtrude;
+        protected ExtrudeDefinition oExtrudeDef;
+        protected ExtrudeFeature oExtrude;
         private EdgeCollection oEdges;
         private FilletFeature oFillet;
         private Material oMaterial;

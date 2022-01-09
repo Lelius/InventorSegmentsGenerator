@@ -125,6 +125,8 @@
     </Compile>
     <Compile Include="CompositeSection.cs" />
     <Compile Include="CompositeSectionsGenenator.cs" />
+    <Compile Include="PartsSection\LinerPartE29.cs" />
+    <Compile Include="PartsSection\LinerPartE38.cs" />
     <Compile Include="PartsSection\LinerPartG38x39.cs" />
     <Compile Include="PartsSection\CrossbarPartA38.cs" />
     <Compile Include="PartsSection\CrossbarPartA48.cs" />

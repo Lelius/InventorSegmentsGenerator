@@ -5,17 +5,17 @@ namespace InventorSegmentsGenerator
 {
     public class ProfileG38x39 : ProfileFrameSection
     {
-        private double lengthProfile;
-        private string materialProfile = "";
-        private string colorProfile = "";
+        public double lengthProfile;
+        public string materialProfile = "";
+        public string colorProfile = "";
         private PlanarSketch oSketch;
         private Point2d[] point;
         private Point2d pointCenter;
         private SketchLine[] oLine;
         private SketchCircle oCircle;
-        private Profile oProfile;
-        private ExtrudeDefinition oExtrudeDef;
-        private ExtrudeFeature oExtrude;
+        protected Profile oProfile;
+        protected ExtrudeDefinition oExtrudeDef;
+        protected ExtrudeFeature oExtrude;
         private EdgeCollection oEdges;
         private FilletFeature oFillet;
         private Material oMaterial;

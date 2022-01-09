@@ -47,22 +47,27 @@ namespace InventorSegmentsGenerator
             //ProfileB30x7_3 profileB30X7_3 = new ProfileB30x7_3(m_inventorApplication, 20);
             //profileB30X7_3.createProfile();
 
-            PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
-            pillarPart.BasicAngle = 25;
-            pillarPart.createPillarPart();
+            //PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
+            //pillarPart.BasicAngle = 25;
+            //pillarPart.createPillarPart();
 
-            distanceToHoles.Add(7);
-            distanceToHoles.Add(13);
+            //distanceToHoles.Add(7);
+            //distanceToHoles.Add(13);
 
-            CrossbarPartA48 crossbarPartA48 = new CrossbarPartA48(m_inventorApplication, 20);
-            crossbarPartA48.BasicAngle = 25;
-            crossbarPartA48.distanceToHoles = this.distanceToHoles;
-            crossbarPartA48.createCrossbarPart();
+            //CrossbarPartA48 crossbarPartA48 = new CrossbarPartA48(m_inventorApplication, 20);
+            //crossbarPartA48.BasicAngle = 25;
+            //crossbarPartA48.distanceToHoles = this.distanceToHoles;
+            //crossbarPartA48.createCrossbarPart();
 
-            CrossbarPartA38 crossbarPartA38 = new CrossbarPartA38(m_inventorApplication, 20);
-            crossbarPartA38.BasicAngle = 25;
-            crossbarPartA38.distanceToHoles = this.distanceToHoles;
-            crossbarPartA38.createCrossbarPart();
+            //CrossbarPartA38 crossbarPartA38 = new CrossbarPartA38(m_inventorApplication, 20);
+            //crossbarPartA38.BasicAngle = 25;
+            //crossbarPartA38.distanceToHoles = this.distanceToHoles;
+            //crossbarPartA38.createCrossbarPart();
+
+            LinerPartG38x39 linerPart = new LinerPartG38x39(m_inventorApplication, 2.4, "Стеклопластик", "Оранжевый");
+            linerPart.BasicAngle = 25;
+            linerPart.createLiner();
+
             //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);
             //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
             //ProfileA38 a38 = new ProfileA38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");

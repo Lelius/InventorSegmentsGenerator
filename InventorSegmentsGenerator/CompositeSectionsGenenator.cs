@@ -68,6 +68,9 @@ namespace InventorSegmentsGenerator
             linerPart.BasicAngle = 25;
             linerPart.createLiner();
 
+            ProfileE29 e29 = new ProfileE29(m_inventorApplication, 10, "Стеклопластик", "Оливково-зеленый");
+            e29.createProfile();
+
             //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);
             //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
             //ProfileA38 a38 = new ProfileA38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");

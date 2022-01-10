@@ -36,51 +36,21 @@ namespace InventorSegmentsGenerator
             string projectPath = System.Environment.ExpandEnvironmentVariables("%USERPROFILE%\\Desktop\\Section\\");
             string projectName = "Section";
             DesignProject oProject;
+            AssemblyDocument oAssDoc;
+            Matrix oPositionMatrix;
 
             oProject = createAndAcivateProject(m_inventorApplication, projectName, projectPath);
+            oAssDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject) as AssemblyDocument;
+            oAssDoc.FullFileName = projectPath + "Секция.iam";
+            oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
 
-            //AssemblyDocument oAssDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "") as AssemblyDocument; 
-            //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
-
-            //PillarPartA48 pillarPartA48 = new PillarPartA48(m_inventorApplication);
-            //pillarPartA48.createPillarPart();
-            //ProfileB30x7_3 profileB30X7_3 = new ProfileB30x7_3(m_inventorApplication, 20);
-            //profileB30X7_3.createProfile();
-
-            //PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
-            //pillarPart.BasicAngle = 25;
-            //pillarPart.createPillarPart();
-
-            //distanceToHoles.Add(7);
-            //distanceToHoles.Add(13);
-
-            //CrossbarPartA48 crossbarPartA48 = new CrossbarPartA48(m_inventorApplication, 20);
-            //crossbarPartA48.BasicAngle = 25;
-            //crossbarPartA48.distanceToHoles = this.distanceToHoles;
-            //crossbarPartA48.createCrossbarPart();
-
-            //CrossbarPartA38 crossbarPartA38 = new CrossbarPartA38(m_inventorApplication, 20);
-            //crossbarPartA38.BasicAngle = 25;
-            //crossbarPartA38.distanceToHoles = this.distanceToHoles;
-            //crossbarPartA38.createCrossbarPart();
-
-            LinerPartG38x39 linerPart = new LinerPartG38x39(m_inventorApplication, 2.4, "Стеклопластик", "Оранжевый");
-            linerPart.BasicAngle = 25;
-            linerPart.createLiner();
-
-            LinerPartE38 e38 = new LinerPartE38(m_inventorApplication, 10, "Стеклопластик", "Оливково-зеленый");
-            e38.BasicAngle = 25;
-            e38.createLiner();
-
-            LinerPartE29 e29 = new LinerPartE29(m_inventorApplication, 10, "Стеклопластик", "Оливково-зеленый");
-            e29.BasicAngle = 25;
-            e29.createLiner();
-
-            //AssemblyDocument oAssDoc = (AssemblyDocument)m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject, "", true);
-            //Matrix oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
-            //ProfileA38 a38 = new ProfileA38(m_inventorApplication, 15, "Стеклопластик", "Оранжевый");
-            //a38.createProfile();
-            //a38.oDoc.DisplayName = "Швеллер А38";
+            PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
+            pillarPart.createPillarPart();
+            
+            pillarPart.oDoc.FullFileName = projectPath + "СтойкаЛевая1.ipt";
+            if (!System.IO.File.Exists(pillarPart.oDoc.FullFileName))
+                pillarPart.oPartDoc.Save();
+            ComponentOccurrence pillarPartLeft1 = oAssDoc.ComponentDefinition.Occurrences.Add(pillarPart.oDoc.FullFileName, oPositionMatrix);
 
 
 

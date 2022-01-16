@@ -7,6 +7,77 @@ namespace InventorSegmentsGenerator
     public enum TypeOfFasteningEnum { Boot, Ground, Rack };
 
 
+    public struct RodsSection
+    {
+        private RodInMiddleEnum rodInMiddle;
+        public RodInMiddleEnum RodInMiddle
+        {
+            get { return rodInMiddle; }
+            set { rodInMiddle = value; }
+        }
+
+        private int numberShortRods;
+        public int NumberShortRods
+        {
+            get { return numberShortRods; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("Недопустимое значение количества коротких прутков!");
+                numberShortRods = value;
+            }
+        }
+
+        private int numberLongRods;
+        public int NumberLongRods
+        {
+            get { return numberLongRods; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("Недопустимое значение количества длинных прутков!");
+                numberLongRods = value;
+            }
+        }
+
+        private double distanceLongRods;
+        public double DistanceLongRods
+        {
+            get { return distanceLongRods; }
+            set
+            {
+                if (value > 600.0 | value < 0.0)
+                    throw new ArgumentException("Недопустимое значение расстояния между длинными прутками!");
+                distanceLongRods = value;
+            }
+        }
+
+        private double distanceShortRods;
+        public double DistanceShortRods
+        {
+            get { return distanceShortRods; }
+            set
+            {
+                if (value > 600.0 | value < 0.0)
+                    throw new ArgumentException("Недопустимое значение расстояния между короткими прутками!");
+                distanceShortRods = value;
+            }
+        }
+
+        private double distanceFirstRodSideStand;
+        public double DistanceFirstRodSideStand
+        {
+            get { return distanceFirstRodSideStand; }
+            set
+            {
+                if (value > 600.0 | value < 0.0)
+                    throw new ArgumentException("Недопустимое значение расстояния между короткими прутками!");
+                distanceFirstRodSideStand = value;
+            }
+        }
+    }
+
+
     public class CompositeSection
     {
         private ProfileTypeEnum channel;
@@ -109,72 +180,7 @@ namespace InventorSegmentsGenerator
             }
         }
 
-        private RodInMiddleEnum rodInMiddle;
-        public RodInMiddleEnum RodInMiddle
-        {
-            get { return rodInMiddle; }
-            set { rodInMiddle = value; }
-        }
-
-        private int numberShortRods;
-        public int NumberShortRods
-        {
-            get { return numberShortRods; }
-            set 
-            {
-                if (value < 0)
-                    throw new ArgumentException("Недопустимое значение количества коротких прутков!");
-                numberShortRods = value; 
-            }
-        }
-
-        private int numberLongRods;
-        public int NumberLongRods
-        {
-            get { return numberLongRods; }
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentException("Недопустимое значение количества длинных прутков!");
-                numberLongRods = value;
-            }
-        }
-
-        private double distanceLongRods;
-        public double DistanceLongRods
-        {
-            get { return distanceLongRods; }
-            set 
-            {
-                if (value > 600.0 | value < 0.0)
-                    throw new ArgumentException("Недопустимое значение расстояния между длинными прутками!");
-                distanceLongRods = value; 
-            }
-        }
-
-        private double distanceShortRods;
-        public double DistanceShortRods
-        {
-            get { return distanceShortRods; }
-            set
-            {
-                if (value > 600.0 | value < 0.0)
-                    throw new ArgumentException("Недопустимое значение расстояния между короткими прутками!");
-                distanceShortRods = value;
-            }
-        }
-
-        private double distanceFirstRodSideStand;
-        public double DistanceFirstRodSideStand
-        {
-            get { return distanceFirstRodSideStand; }
-            set
-            {
-                if (value > 600.0 | value < 0.0)
-                    throw new ArgumentException("Недопустимое значение расстояния между короткими прутками!");
-                distanceFirstRodSideStand = value;
-            }
-        }
+        private RodsSection rodsSection;
 
         private TypeOfFasteningEnum typeSupportLeft;
         public TypeOfFasteningEnum TypeSupportLeft
@@ -200,11 +206,12 @@ namespace InventorSegmentsGenerator
             HeightCrossbarRail = 110.0;
             HeightGroundRail = 120.0;
             HeightSideStand = 170;
-            RodInMiddle = RodInMiddleEnum.Auto;
-            NumberShortRods = 2;
-            DistanceLongRods = 49.2;
-            DistanceShortRods = 16.4;
-            DistanceFirstRodSideStand = 15.5;
+            rodsSection.RodInMiddle = RodInMiddleEnum.Auto;
+            rodsSection.NumberShortRods = 2;
+            rodsSection.NumberLongRods = 2;
+            rodsSection.DistanceLongRods = 49.2;
+            rodsSection.DistanceShortRods = 16.4;
+            rodsSection.DistanceFirstRodSideStand = 15.5;
             TypeSupportLeft = TypeSupportRight = TypeOfFasteningEnum.Boot;
         }
     }

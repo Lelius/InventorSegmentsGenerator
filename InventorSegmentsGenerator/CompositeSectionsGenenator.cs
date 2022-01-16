@@ -53,7 +53,6 @@ namespace InventorSegmentsGenerator
             ComponentOccurrence pillarPartLeft1 = oAssDoc.ComponentDefinition.Occurrences.Add(pillarPart.oDoc.FullFileName, oPositionMatrix);
 
 
-
             //m_mainForm = new FormSectionsGenerator();
             //m_mainForm.Show();
         }

@@ -7,7 +7,6 @@ namespace InventorSegmentsGenerator
     public class PillarPartA38 : ProfileA38
     {
         const double HeightProfile = 2.5;
-        public enum TypeOfFastening { Boot, Ground, Rack }
 
         private double basicAngle;
         public double BasicAngle
@@ -19,7 +18,7 @@ namespace InventorSegmentsGenerator
         public double heightPillar;
         public int numberOfHoles;
         public Dictionary<int, double> distanceToHoles;
-        public TypeOfFastening typeOfFastening;
+        public TypeOfFasteningEnum typeOfFastening;
         public double holeBoltDiametr;
         public double holeGroundDiametr;
 
@@ -30,13 +29,13 @@ namespace InventorSegmentsGenerator
             heightPillar = 120;
             numberOfHoles = 3;
             distanceToHoles = new Dictionary<int, double> { { 1, 3.6 }, { 2, 45 }, { 3, 95 } };
-            typeOfFastening = TypeOfFastening.Boot;
+            typeOfFastening = TypeOfFasteningEnum.Boot;
             holeBoltDiametr = 0.9;
             holeGroundDiametr = 0.52;
             basicAngle = 0;
         }
 
-        public PillarPartA38(Inventor.Application invApp, double heightPillar, string materialProfile, string colorProfile, TypeOfFastening typeOfFastening) :
+        public PillarPartA38(Inventor.Application invApp, double heightPillar, string materialProfile, string colorProfile, TypeOfFasteningEnum typeOfFastening) :
             base(invApp, heightPillar, materialProfile, colorProfile)
 
         {
@@ -62,9 +61,9 @@ namespace InventorSegmentsGenerator
         {
             switch (typeOfFastening)
             {
-                case TypeOfFastening.Boot:
+                case TypeOfFasteningEnum.Boot:
                     break;
-                case TypeOfFastening.Ground:
+                case TypeOfFasteningEnum.Ground:
                     {
                         ExtrudeFeature extrudeFeature = oCompDef.Features.ExtrudeFeatures["Выдавливание1"];
                         foreach (Face oF in extrudeFeature.SideFaces)
@@ -107,7 +106,7 @@ namespace InventorSegmentsGenerator
                         }
                     }
                     break;
-                case TypeOfFastening.Rack:
+                case TypeOfFasteningEnum.Rack:
                     break;
                 default:
                     return;

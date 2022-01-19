@@ -44,7 +44,7 @@ namespace InventorSegmentsGenerator
             this.labelTypeSupport = new System.Windows.Forms.Label();
             this.labelCenterLayout = new System.Windows.Forms.Label();
             this.comboBoxChannel = new System.Windows.Forms.ComboBox();
-            this.textBoxLengthSection = new System.Windows.Forms.TextBox();
+            this.textBoxLengthSubsection = new System.Windows.Forms.TextBox();
             this.textBoxHeightCrossbarRail = new System.Windows.Forms.TextBox();
             this.textBoxHeightGroundRail = new System.Windows.Forms.TextBox();
             this.textBoxHeightSideStand = new System.Windows.Forms.TextBox();
@@ -55,19 +55,22 @@ namespace InventorSegmentsGenerator
             this.textBoxDistanceShortRods = new System.Windows.Forms.TextBox();
             this.textBoxDistanceShortRodSideStand = new System.Windows.Forms.TextBox();
             this.comboBoxTypeSupport = new System.Windows.Forms.ComboBox();
-            this.comboBoxNumberSupport = new System.Windows.Forms.ComboBox();
-            this.labelNumberSupport = new System.Windows.Forms.Label();
+            this.labelNumberSubsections = new System.Windows.Forms.Label();
+            this.textBoxNumberSubsections = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.tabControlSubsections = new System.Windows.Forms.TabControl();
+            this.tabPageLeft = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageRight = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabControlSubsections.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -112,7 +115,7 @@ namespace InventorSegmentsGenerator
             this.tableLayoutPanel2.Controls.Add(this.labelTypeSupport, 0, 11);
             this.tableLayoutPanel2.Controls.Add(this.labelCenterLayout, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.comboBoxChannel, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBoxLengthSection, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxLengthSubsection, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.textBoxHeightCrossbarRail, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.textBoxHeightGroundRail, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.textBoxHeightSideStand, 1, 4);
@@ -123,8 +126,8 @@ namespace InventorSegmentsGenerator
             this.tableLayoutPanel2.Controls.Add(this.textBoxDistanceShortRods, 1, 8);
             this.tableLayoutPanel2.Controls.Add(this.textBoxDistanceShortRodSideStand, 1, 9);
             this.tableLayoutPanel2.Controls.Add(this.comboBoxTypeSupport, 1, 11);
-            this.tableLayoutPanel2.Controls.Add(this.comboBoxNumberSupport, 1, 10);
-            this.tableLayoutPanel2.Controls.Add(this.labelNumberSupport, 0, 10);
+            this.tableLayoutPanel2.Controls.Add(this.labelNumberSubsections, 0, 10);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxNumberSubsections, 1, 10);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -181,9 +184,9 @@ namespace InventorSegmentsGenerator
             this.labelHeightSideStand.AutoSize = true;
             this.labelHeightSideStand.Location = new System.Drawing.Point(13, 243);
             this.labelHeightSideStand.Name = "labelHeightSideStand";
-            this.labelHeightSideStand.Size = new System.Drawing.Size(250, 20);
+            this.labelHeightSideStand.Size = new System.Drawing.Size(242, 20);
             this.labelHeightSideStand.TabIndex = 4;
-            this.labelHeightSideStand.Text = "Высота боковой стойки (мм)";
+            this.labelHeightSideStand.Text = "Полная высота секции (мм)";
             // 
             // labelChannel
             // 
@@ -193,7 +196,7 @@ namespace InventorSegmentsGenerator
             this.labelChannel.Name = "labelChannel";
             this.labelChannel.Size = new System.Drawing.Size(235, 40);
             this.labelChannel.TabIndex = 0;
-            this.labelChannel.Text = "Основной профиль секции\r\n(номер швеллера)";
+            this.labelChannel.Text = "Основной профиль секции\r\n(тип швеллера)";
             // 
             // labelDistanceShortRodSideStand
             // 
@@ -241,9 +244,9 @@ namespace InventorSegmentsGenerator
             this.labelCenterLayout.AutoSize = true;
             this.labelCenterLayout.Location = new System.Drawing.Point(13, 297);
             this.labelCenterLayout.Name = "labelCenterLayout";
-            this.labelCenterLayout.Size = new System.Drawing.Size(283, 20);
+            this.labelCenterLayout.Size = new System.Drawing.Size(338, 20);
             this.labelCenterLayout.TabIndex = 5;
-            this.labelCenterLayout.Text = "Компоновка прутков (по центру)";
+            this.labelCenterLayout.Text = "Пруток в центре (компоновка прутков)";
             // 
             // comboBoxChannel
             // 
@@ -252,21 +255,21 @@ namespace InventorSegmentsGenerator
             this.comboBoxChannel.Items.AddRange(new object[] {
             "А38",
             "А48"});
-            this.comboBoxChannel.Location = new System.Drawing.Point(439, 23);
+            this.comboBoxChannel.Location = new System.Drawing.Point(439, 24);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(100, 28);
             this.comboBoxChannel.Sorted = true;
             this.comboBoxChannel.TabIndex = 11;
             this.comboBoxChannel.Text = "А38";
             // 
-            // textBoxLengthSection
+            // textBoxLengthSubsection
             // 
-            this.textBoxLengthSection.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxLengthSection.Location = new System.Drawing.Point(439, 77);
-            this.textBoxLengthSection.Name = "textBoxLengthSection";
-            this.textBoxLengthSection.Size = new System.Drawing.Size(100, 27);
-            this.textBoxLengthSection.TabIndex = 12;
-            this.textBoxLengthSection.Text = "2000";
+            this.textBoxLengthSubsection.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxLengthSubsection.Location = new System.Drawing.Point(439, 77);
+            this.textBoxLengthSubsection.Name = "textBoxLengthSubsection";
+            this.textBoxLengthSubsection.Size = new System.Drawing.Size(100, 27);
+            this.textBoxLengthSubsection.TabIndex = 12;
+            this.textBoxLengthSubsection.Text = "2000";
             // 
             // textBoxHeightCrossbarRail
             // 
@@ -310,9 +313,10 @@ namespace InventorSegmentsGenerator
             this.comboBoxCenterLayout.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBoxCenterLayout.FormattingEnabled = true;
             this.comboBoxCenterLayout.Items.AddRange(new object[] {
-            "Пруток",
-            "Пусто"});
-            this.comboBoxCenterLayout.Location = new System.Drawing.Point(439, 294);
+            "Авто",
+            "Да",
+            "Нет"});
+            this.comboBoxCenterLayout.Location = new System.Drawing.Point(439, 293);
             this.comboBoxCenterLayout.Name = "comboBoxCenterLayout";
             this.comboBoxCenterLayout.Size = new System.Drawing.Size(100, 28);
             this.comboBoxCenterLayout.TabIndex = 16;
@@ -368,29 +372,23 @@ namespace InventorSegmentsGenerator
             this.comboBoxTypeSupport.TabIndex = 21;
             this.comboBoxTypeSupport.Text = "Грунт";
             // 
-            // comboBoxNumberSupport
+            // labelNumberSubsections
             // 
-            this.comboBoxNumberSupport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBoxNumberSupport.FormattingEnabled = true;
-            this.comboBoxNumberSupport.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "Нет"});
-            this.comboBoxNumberSupport.Location = new System.Drawing.Point(439, 563);
-            this.comboBoxNumberSupport.Name = "comboBoxNumberSupport";
-            this.comboBoxNumberSupport.Size = new System.Drawing.Size(101, 28);
-            this.comboBoxNumberSupport.TabIndex = 23;
-            this.comboBoxNumberSupport.Text = "2";
+            this.labelNumberSubsections.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelNumberSubsections.AutoSize = true;
+            this.labelNumberSubsections.Location = new System.Drawing.Point(13, 567);
+            this.labelNumberSubsections.Name = "labelNumberSubsections";
+            this.labelNumberSubsections.Size = new System.Drawing.Size(195, 20);
+            this.labelNumberSubsections.TabIndex = 22;
+            this.labelNumberSubsections.Text = "Количество опор (шт)";
             // 
-            // labelNumberSupport
+            // textBoxNumberSubsections
             // 
-            this.labelNumberSupport.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelNumberSupport.AutoSize = true;
-            this.labelNumberSupport.Location = new System.Drawing.Point(13, 567);
-            this.labelNumberSupport.Name = "labelNumberSupport";
-            this.labelNumberSupport.Size = new System.Drawing.Size(195, 20);
-            this.labelNumberSupport.TabIndex = 22;
-            this.labelNumberSupport.Text = "Количество опор (шт)";
+            this.textBoxNumberSubsections.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxNumberSubsections.Location = new System.Drawing.Point(439, 563);
+            this.textBoxNumberSubsections.Name = "textBoxNumberSubsections";
+            this.textBoxNumberSubsections.Size = new System.Drawing.Size(100, 27);
+            this.textBoxNumberSubsections.TabIndex = 23;
             // 
             // panel2
             // 
@@ -406,9 +404,9 @@ namespace InventorSegmentsGenerator
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label11, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label12, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.tabControlSubsections, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -419,17 +417,6 @@ namespace InventorSegmentsGenerator
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(553, 671);
             this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::InvAddIn.Properties.Resources.back_for_sizes;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(527, 462);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // label11
             // 
@@ -448,6 +435,46 @@ namespace InventorSegmentsGenerator
             this.label12.Size = new System.Drawing.Size(62, 20);
             this.label12.TabIndex = 11;
             this.label12.Text = "label12";
+            // 
+            // tabControlSubsections
+            // 
+            this.tabControlSubsections.Controls.Add(this.tabPageLeft);
+            this.tabControlSubsections.Controls.Add(this.tabPage1);
+            this.tabControlSubsections.Controls.Add(this.tabPageRight);
+            this.tabControlSubsections.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlSubsections.Location = new System.Drawing.Point(13, 13);
+            this.tabControlSubsections.Name = "tabControlSubsections";
+            this.tabControlSubsections.SelectedIndex = 0;
+            this.tabControlSubsections.Size = new System.Drawing.Size(527, 462);
+            this.tabControlSubsections.TabIndex = 12;
+            // 
+            // tabPageLeft
+            // 
+            this.tabPageLeft.Location = new System.Drawing.Point(4, 29);
+            this.tabPageLeft.Name = "tabPageLeft";
+            this.tabPageLeft.Size = new System.Drawing.Size(519, 429);
+            this.tabPageLeft.TabIndex = 2;
+            this.tabPageLeft.Text = "Левый обвес";
+            this.tabPageLeft.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(519, 429);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Подсекция 1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPageRight
+            // 
+            this.tabPageRight.Location = new System.Drawing.Point(4, 29);
+            this.tabPageRight.Name = "tabPageRight";
+            this.tabPageRight.Size = new System.Drawing.Size(519, 429);
+            this.tabPageRight.TabIndex = 3;
+            this.tabPageRight.Text = "Правый обвес";
+            this.tabPageRight.UseVisualStyleBackColor = true;
             // 
             // FormSectionsGenerator
             // 
@@ -468,7 +495,7 @@ namespace InventorSegmentsGenerator
             this.panel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabControlSubsections.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,24 +516,27 @@ namespace InventorSegmentsGenerator
         private System.Windows.Forms.Label labelDistanceLongRods;
         private System.Windows.Forms.Label labelDistanceShortRods;
         private System.Windows.Forms.Label labelDistanceShortRodSideStand;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label labelTypeSupport;
         private System.Windows.Forms.ComboBox comboBoxChannel;
-        private System.Windows.Forms.TextBox textBoxLengthSection;
+        private System.Windows.Forms.TextBox textBoxLengthSubsection;
         private System.Windows.Forms.TextBox textBoxHeightCrossbarRail;
         private System.Windows.Forms.TextBox textBoxHeightGroundRail;
         private System.Windows.Forms.TextBox textBoxHeightSideStand;
         private System.Windows.Forms.ComboBox comboBoxCenterLayout;
+        private System.Windows.Forms.Label labelNumberSubsections;
+        private System.Windows.Forms.Label labelTypeSupport;
         private System.Windows.Forms.TextBox textBoxNumberShortRods;
         private System.Windows.Forms.TextBox textBoxDistanceLongRods;
         private System.Windows.Forms.TextBox textBoxDistanceShortRods;
         private System.Windows.Forms.TextBox textBoxDistanceShortRodSideStand;
         private System.Windows.Forms.ComboBox comboBoxTypeSupport;
-        private System.Windows.Forms.ComboBox comboBoxNumberSupport;
-        private System.Windows.Forms.Label labelNumberSupport;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TabControl tabControlSubsections;
+        private System.Windows.Forms.TabPage tabPageLeft;
+        private System.Windows.Forms.TabPage tabPageRight;
+        private System.Windows.Forms.TextBox textBoxNumberSubsections;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }

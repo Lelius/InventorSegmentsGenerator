@@ -5,7 +5,7 @@ namespace InventorSegmentsGenerator
 {
     public class CompositeSubsections
     {
-        public static readonly int NUMBERSUBSECTIONMAX = 120;
+        public static readonly int NUMBERSUBSECTIONMAX = 10;
         public CompositeSubsection[] compositeSubsections;
 
         private int count;
@@ -20,6 +20,7 @@ namespace InventorSegmentsGenerator
             count = 0;
         }
 
+
         public void Add(CompositeSubsection compositeSubsection)
         {
             if (count <= 120)
@@ -30,6 +31,7 @@ namespace InventorSegmentsGenerator
             else
                 throw new Exception("Коллекция CompositeSubsections заполена полностью (120 элементов).");
         }
+
 
         public void Clear()
         {

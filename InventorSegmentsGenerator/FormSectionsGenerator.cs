@@ -5,63 +5,66 @@ namespace InventorSegmentsGenerator
 {
     public partial class FormSectionsGenerator : Form
     {
-        CompositeSection compositeSection;
+        private CompositeSection compositeSection;
 
-         public FormSectionsGenerator()
+        public FormSectionsGenerator()
         {
             InitializeComponent();
 
             compositeSection = new CompositeSection();
-            checkBoxLeftBodyKit.Checked = false;
-            checkBoxRightBodyKit.Checked = false;
-            textBoxNumberSubsections.Text = compositeSection.compositeSubsections.Count.ToString();
-        }
 
-
-        private void displayAllTab()
-        {
-            tabControlSubsections.TabPages.Clear();
-
-            if (checkBoxLeftBodyKit.Checked == true)
+            int index;
+            if (compositeSection.TypeOfMainChannel == ProfileTypeEnum.A38)
             {
-                tabControlSubsections.TabPages.Add("Левый обвес");
+                index = comboBoxChannel.FindString("А38");
             }
-
-            int result;
-            if (Int32.TryParse(textBoxNumberSubsections.Text, out result))
+            else if (compositeSection.TypeOfMainChannel == ProfileTypeEnum.A48)
             {
-                if (result >= 0 && result <= 120)
-                {
-                    //compositeSection.compositeSubsections.Count = result;
-                    for (int i = 0; i < result; i++)
-                    {
-                        tabControlSubsections.TabPages.Add("Подсекция " + (i + 1));
-                    }
-                }
+                index = comboBoxChannel.FindString("А38");
             }
+            else
+                index = 0;
+            comboBoxChannel.SelectedIndex = index;
 
-            if (checkBoxRightBodyKit.Checked == true)
+            numericUpDownLengthSection.Value = (decimal)compositeSection.LengthSection;
+            numericUpDownBasicAngle.Value = (decimal)compositeSection.BasicAngle;
+            numericUpDownNumberSubsections.Value = (decimal)compositeSection.NumberSubsections;
+            checkBoxLeftBodyKit.Checked = compositeSection.LeftBodyKit;
+            checkBoxRightBodyKit.Checked = compositeSection.RightBodyKit;
+            numericUpDownHeightSideStand.Value = (decimal)compositeSection.HeightSideStand;
+            numericUpDownHeightTopCrossbarRail.Value = (decimal)compositeSection.HeightTopCrossbarRail;
+            numericUpDownHeightBottomCrossbarRail.Value = (decimal)compositeSection.HeightBottomCrossbarRail;
+            numericUpDownHeightGroundRail.Value = (decimal)compositeSection.HeightGroundRail;
+        }
+
+        public FormSectionsGenerator(CompositeSection compositeSectionParent)
+        {
+            InitializeComponent();
+
+            compositeSection = compositeSectionParent;
+
+            int index;
+            if (compositeSection.TypeOfMainChannel == ProfileTypeEnum.A38)
             {
-                tabControlSubsections.TabPages.Add("Правый обвес");
+                index = comboBoxChannel.FindString("А38");
             }
+            else if (compositeSection.TypeOfMainChannel == ProfileTypeEnum.A48)
+            {
+                index = comboBoxChannel.FindString("А38");
+            }
+            else
+                index = 0;
+            comboBoxChannel.SelectedIndex = index;
+
+            numericUpDownLengthSection.Value = (decimal)compositeSection.LengthSection;
+            numericUpDownBasicAngle.Value = (decimal)compositeSection.BasicAngle;
+            numericUpDownNumberSubsections.Value = (decimal)compositeSection.NumberSubsections;
+            checkBoxLeftBodyKit.Checked = compositeSection.LeftBodyKit;
+            checkBoxRightBodyKit.Checked = compositeSection.RightBodyKit;
+            numericUpDownHeightSideStand.Value = (decimal)compositeSection.HeightSideStand;
+            numericUpDownHeightTopCrossbarRail.Value = (decimal)compositeSection.HeightTopCrossbarRail;
+            numericUpDownHeightBottomCrossbarRail.Value = (decimal)compositeSection.HeightBottomCrossbarRail;
+            numericUpDownHeightGroundRail.Value = (decimal)compositeSection.HeightGroundRail;
         }
-
-
-        private void checkBoxLeftBodyKit_CheckedChanged(object sender, System.EventArgs e)
-        {
-            displayAllTab();
-        }
-
-
-        private void checkBoxRightBodyKit_CheckedChanged(object sender, System.EventArgs e)
-        {
-            displayAllTab();
-        }
-
-        private void textBoxNumberSubsections_TextChanged(object sender, System.EventArgs e)
-        {
-            displayAllTab();
-        }
-
     }
 }

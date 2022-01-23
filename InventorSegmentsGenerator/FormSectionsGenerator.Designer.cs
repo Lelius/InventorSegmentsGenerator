@@ -170,7 +170,7 @@ namespace InventorSegmentsGenerator
             this.comboBoxChannel.Items.AddRange(new object[] {
             "А38",
             "А48"});
-            this.comboBoxChannel.Location = new System.Drawing.Point(439, 23);
+            this.comboBoxChannel.Location = new System.Drawing.Point(439, 24);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(100, 28);
             this.comboBoxChannel.Sorted = true;
@@ -283,7 +283,6 @@ namespace InventorSegmentsGenerator
             this.checkBoxRightBodyKit.Size = new System.Drawing.Size(18, 17);
             this.checkBoxRightBodyKit.TabIndex = 25;
             this.checkBoxRightBodyKit.UseVisualStyleBackColor = true;
-            this.checkBoxRightBodyKit.CheckedChanged += new System.EventHandler(this.checkBoxRightBodyKit_CheckedChanged);
             // 
             // labelNumberSubsections
             // 
@@ -327,7 +326,6 @@ namespace InventorSegmentsGenerator
             this.checkBoxLeftBodyKit.Size = new System.Drawing.Size(18, 17);
             this.checkBoxLeftBodyKit.TabIndex = 24;
             this.checkBoxLeftBodyKit.UseVisualStyleBackColor = true;
-            this.checkBoxLeftBodyKit.CheckedChanged += new System.EventHandler(this.checkBoxLeftBodyKit_CheckedChanged);
             // 
             // labelHeightGroundRail
             // 

@@ -29,11 +29,11 @@ namespace InventorSegmentsGenerator
             }
         }
 
-        private double lengthRail;                                      //бродят мысли про составные перила
-        public double LengthRail
+        private double lengthSection;                                      //бродят мысли про составные перила
+        public double LengthSection
         {
-            get => lengthRail;
-            set => lengthRail = value;
+            get => lengthSection;
+            set => lengthSection = value;
         }
 
         private int numberSubsections;
@@ -119,7 +119,7 @@ namespace InventorSegmentsGenerator
         {
             typeOfMainChannel = ProfileTypeEnum.A38;
             BasicAngle = 0;
-            LengthRail = 0;
+            LengthSection = 0;
             NumberSubsections = 0;
             LeftBodyKit = false;
             RightBodyKit = false;
@@ -137,7 +137,7 @@ namespace InventorSegmentsGenerator
             {
                 typeOfMainChannel = ProfileTypeEnum.A38;
                 BasicAngle = 0;
-                LengthRail = length;
+                LengthSection = length;
                 NumberSubsections = 0;
                 LeftBodyKit = false;
                 RightBodyKit = false;
@@ -152,7 +152,7 @@ namespace InventorSegmentsGenerator
             {
                 typeOfMainChannel = ProfileTypeEnum.A38;
                 BasicAngle = 0;
-                LengthRail = length;
+                LengthSection = length;
                 NumberSubsections = 1;
                 LeftBodyKit = false;
                 RightBodyKit = false;

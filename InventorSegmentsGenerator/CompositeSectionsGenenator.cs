@@ -15,6 +15,7 @@ namespace InventorSegmentsGenerator
         ButtonIcons m_buttonIcons;
         FormSectionsGenerator m_mainForm;
         List<double> distanceToHoles = new List<double>();
+        CompositeSection compositeSection;
 
         public CompositeSectionsGenenator(Inventor.Application m_inventorApplication)
         {
@@ -46,14 +47,15 @@ namespace InventorSegmentsGenerator
 
             //PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
             //pillarPart.createPillarPart();
-            
+
             //pillarPart.oDoc.FullFileName = projectPath + "СтойкаЛевая1.ipt";
             //if (!System.IO.File.Exists(pillarPart.oDoc.FullFileName))
             //    pillarPart.oPartDoc.Save();
             //ComponentOccurrence pillarPartLeft1 = oAssDoc.ComponentDefinition.Occurrences.Add(pillarPart.oDoc.FullFileName, oPositionMatrix);
 
+            compositeSection = new CompositeSection(150);
 
-            m_mainForm = new FormSectionsGenerator();
+            m_mainForm = new FormSectionsGenerator(compositeSection);
             m_mainForm.Show();
         }
 

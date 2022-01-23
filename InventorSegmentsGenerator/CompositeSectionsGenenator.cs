@@ -39,18 +39,18 @@ namespace InventorSegmentsGenerator
             AssemblyDocument oAssDoc;
             Matrix oPositionMatrix;
 
-            oProject = createAndAcivateProject(m_inventorApplication, projectName, projectPath);
-            oAssDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject) as AssemblyDocument;
-            oAssDoc.FullFileName = projectPath + "Секция.iam";
-            oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
+            //oProject = createAndAcivateProject(m_inventorApplication, projectName, projectPath);
+            //oAssDoc = m_inventorApplication.Documents.Add(DocumentTypeEnum.kAssemblyDocumentObject) as AssemblyDocument;
+            //oAssDoc.FullFileName = projectPath + "Секция.iam";
+            //oPositionMatrix = m_inventorApplication.TransientGeometry.CreateMatrix();
 
-            PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
-            pillarPart.createPillarPart();
+            //PillarPartA48 pillarPart = new PillarPartA48(m_inventorApplication);
+            //pillarPart.createPillarPart();
             
-            pillarPart.oDoc.FullFileName = projectPath + "СтойкаЛевая1.ipt";
-            if (!System.IO.File.Exists(pillarPart.oDoc.FullFileName))
-                pillarPart.oPartDoc.Save();
-            ComponentOccurrence pillarPartLeft1 = oAssDoc.ComponentDefinition.Occurrences.Add(pillarPart.oDoc.FullFileName, oPositionMatrix);
+            //pillarPart.oDoc.FullFileName = projectPath + "СтойкаЛевая1.ipt";
+            //if (!System.IO.File.Exists(pillarPart.oDoc.FullFileName))
+            //    pillarPart.oPartDoc.Save();
+            //ComponentOccurrence pillarPartLeft1 = oAssDoc.ComponentDefinition.Occurrences.Add(pillarPart.oDoc.FullFileName, oPositionMatrix);
 
 
             m_mainForm = new FormSectionsGenerator();

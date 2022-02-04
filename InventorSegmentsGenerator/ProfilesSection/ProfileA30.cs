@@ -1,8 +1,10 @@
-﻿using System;
-using Inventor;
+﻿using Inventor;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий профиль Швеллер А30
+    /// </summary>
     public class ProfileA30 : ProfileFrameSection
     {
         private double lengthProfile;
@@ -19,14 +21,24 @@ namespace InventorSegmentsGenerator
         private Material oMaterial;
         private RenderStyle oRenderStyle;
 
-        public ProfileA30(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
-            : base(m_inventorApplication)
+        /// <summary>
+        /// Класс, создающий профиль Швеллер А38
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="lengthProfile">Длина создаваемого профиля (см).</param>
+        /// <param name="materialProfile">Материал создаваемого профиля.</param>
+        /// <param name="colorProfile">Цвет создаваемого профиля.</param>
+        public ProfileA30(Inventor.Application invApp, double lengthProfile, string materialProfile = "", string colorProfile = "")
+            : base(invApp)
         {
             this.lengthProfile = lengthProfile;
             this.materialProfile = materialProfile;
             this.colorProfile = colorProfile;
         }
 
+        /// <summary>
+        /// Создание профиля швеллера.
+        /// </summary>
         public void createProfile()
         {
             oSketch = oCompDef.Sketches.Add(oPartDoc.ComponentDefinition.WorkPlanes[3]);

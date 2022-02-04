@@ -1,8 +1,10 @@
 ﻿using Inventor;
-using System;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий профиль Прямоугольник пустотелый Ж38х39.
+    /// </summary>
     public class ProfileG38x39 : ProfileFrameSection
     {
         public double lengthProfile;
@@ -21,14 +23,24 @@ namespace InventorSegmentsGenerator
         private Material oMaterial;
         private RenderStyle oRenderStyle;
 
-        public ProfileG38x39(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
-            : base(m_inventorApplication)
+        /// <summary>
+        /// Класс, создающий профиль Прямоугольник пустотелый Ж38х39.
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="lengthProfile">Длина создаваемого профиля (см).</param>
+        /// <param name="materialProfile">Материал создаваемого профиля.</param>
+        /// <param name="colorProfile">Цвет создаваемого профиля.</param>
+        public ProfileG38x39(Inventor.Application invApp, double lengthProfile, string materialProfile = "", string colorProfile = "")
+            : base(invApp)
         {
             this.lengthProfile = lengthProfile;
             this.materialProfile = materialProfile;
             this.colorProfile = colorProfile;
         }
 
+        /// <summary>
+        /// Создание профиля прямоугольника пустотелого.
+        /// </summary>
         public void createProfile()
         {
             oSketch = oCompDef.Sketches.Add(oPartDoc.ComponentDefinition.WorkPlanes[3]);

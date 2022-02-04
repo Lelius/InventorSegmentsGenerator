@@ -76,6 +76,9 @@ namespace InventorSegmentsGenerator
             basicAngle = 0;
         }
 
+        /// <summary>
+        /// Создание детали Стойка.
+        /// </summary>
         public void createPillarPart()
         {
             createProfile();

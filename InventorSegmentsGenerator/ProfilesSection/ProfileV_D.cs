@@ -2,8 +2,12 @@
 
 namespace InventorSegmentsGenerator
 {
-    public class ProfileV15 : ProfileFrameSection
+    /// <summary>
+    /// Класс, создающий профиль Прутка круглого В(Диаметр).
+    /// </summary>
+    public class ProfileV_D : ProfileFrameSection
     {
+        private double diameterProfile;
         private double lengthProfile;
         private string materialProfile = "";
         private string colorProfile = "";
@@ -16,20 +20,32 @@ namespace InventorSegmentsGenerator
         private Material oMaterial;
         private RenderStyle oRenderStyle;
 
-        public ProfileV15(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
-            : base(m_inventorApplication)
+        /// <summary>
+        /// Класс, создающий профиль Прутка круглого В(Диаметр).
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="diameterProfile">Диаметр создаваемого профиля (см).</param>
+        /// <param name="lengthProfile">Длина создаваемого профиля (см).</param>
+        /// <param name="materialProfile">Материал создаваемого профиля.</param>
+        /// <param name="colorProfile">Цвет создаваемого профиля.</param>
+        public ProfileV_D(Inventor.Application invApp, double diameterProfile, double lengthProfile, string materialProfile = "", string colorProfile = "")
+            : base(invApp)
         {
+            this.diameterProfile = diameterProfile;
             this.lengthProfile = lengthProfile;
             this.materialProfile = materialProfile;
             this.colorProfile = colorProfile;
         }
 
+        /// <summary>
+        /// Создание профиля прутка круглого.
+        /// </summary>
         public void createProfile()
         {
             oSketch = oCompDef.Sketches.Add(oPartDoc.ComponentDefinition.WorkPlanes[3]);
 
             pointCenter = oTransGeo.CreatePoint2d(0, 0);
-            oCircleOutside = oSketch.SketchCircles.AddByCenterRadius(pointCenter, 0.75);
+            oCircleOutside = oSketch.SketchCircles.AddByCenterRadius(pointCenter, (diameterProfile / 2));
 
             oProfile = oSketch.Profiles.AddForSolid();
             oExtrudeDef = oCompDef.Features.ExtrudeFeatures.CreateExtrudeDefinition(oProfile, PartFeatureOperationEnum.kJoinOperation);

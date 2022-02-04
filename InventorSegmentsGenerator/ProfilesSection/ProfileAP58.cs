@@ -1,9 +1,12 @@
-﻿using Inventor;
-using System;
-using System.Windows.Forms;
+﻿//TODO: Переделать эскиз профиля Ап58 под соврременный перильный профиль, сделать новый перильный профиль АП48.
+
+using Inventor;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий профиль Швеллер перильный АП58.
+    /// </summary>
     public class ProfileAP58 : ProfileFrameSection
     {
         private double lengthProfile;
@@ -20,14 +23,24 @@ namespace InventorSegmentsGenerator
         private Material oMaterial;
         private RenderStyle oRenderStyle;
 
-        public ProfileAP58(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
-            : base(m_inventorApplication)
+        /// <summary>
+        /// Класс, создающий профиль Швеллер перильный АП58.
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="lengthProfile">Длина создаваемого профиля (см).</param>
+        /// <param name="materialProfile">Материал создаваемого профиля.</param>
+        /// <param name="colorProfile">Цвет создаваемого профиля.</param>
+        public ProfileAP58(Inventor.Application invApp, double lengthProfile, string materialProfile = "", string colorProfile = "")
+            : base(invApp)
         {
             this.lengthProfile = lengthProfile;
             this.materialProfile = materialProfile;
             this.colorProfile = colorProfile;
         }
 
+        /// <summary>
+        /// Создание профиля швеллера.
+        /// </summary>
         public void createProfile()
         {
             oSketch = oCompDef.Sketches.Add(oPartDoc.ComponentDefinition.WorkPlanes[3]);

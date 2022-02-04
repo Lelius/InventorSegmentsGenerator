@@ -3,7 +3,7 @@
 namespace InventorSegmentsGenerator
 {
     /// <summary>
-    /// Создание профиля круглой трубы.
+    /// Класс, создающий профиль Трубы круглой Б(Диаметр x Толщина стенки).
     /// </summary>
     class ProfileB_DxS : ProfileFrameSection
     {
@@ -23,16 +23,16 @@ namespace InventorSegmentsGenerator
         private RenderStyle oRenderStyle;
 
         /// <summary>
-        /// Создание профиля круглой трубы.
+        /// Класс, создающий профиль Трубы круглой Б(Диаметр x Толщина стенки).
         /// </summary>
-        /// <param name="m_inventorApplication">Главный объект Inventor.Application</param>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
         /// <param name="diameterProfile">Внешний диаметр трубы (см).</param>
         /// <param name="wallThicknessProfile">Толщина стенки трубы (см).</param>
         /// <param name="lengthProfile">Длина создаваемого профиля трубы (см).</param>
         /// <param name="materialProfile">Материал создаваемого профиля трубы.</param>
         /// <param name="colorProfile">Цвет создаваемого профиля трубы.</param>
-        public ProfileB_DxS(Inventor.Application m_inventorApplication, double diameterProfile, double wallThicknessProfile, double lengthProfile, string materialProfile = "", string colorProfile = "")
-            : base(m_inventorApplication)
+        public ProfileB_DxS(Inventor.Application invApp, double diameterProfile, double wallThicknessProfile, double lengthProfile, string materialProfile = "", string colorProfile = "")
+            : base(invApp)
         {
             this.lengthProfile = lengthProfile;
             this.materialProfile = materialProfile;
@@ -42,7 +42,7 @@ namespace InventorSegmentsGenerator
         }
 
         /// <summary>
-        /// Непосредственное создание профиля трубы.
+        /// Создание профиля трубы круглой.
         /// </summary>
         public void createProfile()
         {

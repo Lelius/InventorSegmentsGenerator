@@ -3,17 +3,27 @@ using System;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Абстрактный класс-каркас профиля, содержащий основные объекты-документы. 
+    /// </summary>
     abstract public class ProfileFrameSection
     {
+        /// <summary>
+        /// Главный объект Inventor.Application
+        /// </summary>
         public Inventor.Application oInvApp { get; set; }
         public Document oDoc { get; set; }
         public PartDocument oPartDoc { get; set; }
         public PartComponentDefinition oCompDef { get; set; }
         public TransientGeometry oTransGeo { get; set; }
 
-        public ProfileFrameSection(Inventor.Application m_inventorApplication)
+        /// <summary>
+        /// Абстрактный класс-каркас профиля, содержащий основные объекты-документы.
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application</param>
+        public ProfileFrameSection(Inventor.Application invApp)
         {
-            oInvApp = m_inventorApplication;
+            oInvApp = invApp;
             oDoc = oInvApp.Documents.Add(DocumentTypeEnum.kPartDocumentObject, "", true);
             oPartDoc = oDoc as PartDocument;
             oCompDef = oPartDoc.ComponentDefinition;
@@ -22,6 +32,12 @@ namespace InventorSegmentsGenerator
             oDoc.UnitsOfMeasure.LengthUnits = UnitsTypeEnum.kMillimeterLengthUnits;
         }
 
+        /// <summary>
+        /// Проверяет, лежит ли точка point на прямой, коллинеарной грани edge и параллельной оси Z.
+        /// </summary>
+        /// <param name="edge">Объект Edge проверяемой грани.</param>
+        /// <param name="point">Объект Point2d проверяемой точки.</param>
+        /// <returns>В случае совпадения точки с прямой возвращается True, иначе возвращается False.</returns>
         protected bool isEdgeAndPoint2dOnStraight(Edge edge, Point2d point)
         {
             if (Math.Abs(edge.StartVertex.Point.X - point.X) < 0.0000001)

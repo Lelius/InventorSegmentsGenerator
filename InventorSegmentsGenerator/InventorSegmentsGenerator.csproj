@@ -151,7 +151,7 @@
     <Compile Include="ProfilesSection\ProfileE38.cs" />
     <Compile Include="ProfilesSection\ProfileFrameSection.cs" />
     <Compile Include="ProfilesSection\ProfileG38x39.cs" />
-    <Compile Include="ProfilesSection\ProfileV15.cs" />
+    <Compile Include="ProfilesSection\ProfileV_D.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

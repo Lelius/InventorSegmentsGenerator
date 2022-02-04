@@ -2,6 +2,9 @@
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий профиль (приближенный) арматуры АКСП диаметром 5 мм.
+    /// </summary>
     public class ProfileAKSP5 : ProfileFrameSection
     {
         private double lengthProfile;
@@ -16,14 +19,24 @@ namespace InventorSegmentsGenerator
         private Material oMaterial;
         private RenderStyle oRenderStyle;
 
-        public ProfileAKSP5(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
-            : base(m_inventorApplication)
+        /// <summary>
+        /// Класс, создающий профиль (приближенный) арматуры АКСП диаметром 5 мм.
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="lengthProfile">Длина создаваемого профиля (см).</param>
+        /// <param name="materialProfile">Материал создаваемого профиля.</param>
+        /// <param name="colorProfile">Цвет создаваемого профиля.</param>
+        public ProfileAKSP5(Inventor.Application invApp, double lengthProfile, string materialProfile = "", string colorProfile = "")
+            : base(invApp)
         {
             this.lengthProfile = lengthProfile;
             this.materialProfile = materialProfile;
             this.colorProfile = colorProfile;
         }
 
+        /// <summary>
+        /// Создание профиля (приближенного) арматуры.
+        /// </summary>
         public void createProfile()
         {
             oSketch = oCompDef.Sketches.Add(oPartDoc.ComponentDefinition.WorkPlanes[3]);

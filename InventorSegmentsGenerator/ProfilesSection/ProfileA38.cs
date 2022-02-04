@@ -3,15 +3,9 @@ using System;
 
 namespace InventorSegmentsGenerator
 {
-    ///<summary>
-    ///Класс, создающий деталь Швеллер А38
-    ///</summary>
-    ///<param name = "m_inventorApplication" > Это главный Inventor.Application объект</param>
-    ///<param name = "lengthProfile" > Длина формируемой детали (в см)</param>
-    ///<param name = "materialProfile" > Материал детали (необязательно)</param>
-    ///<param name = "colorProfile" > Цвет детали (необязательно)</param>
-    ///<returns></returns>
-    ///<remarks></remarks>
+    /// <summary>
+    /// Класс, создающий профиль Швеллер А38.
+    /// </summary>
     public class ProfileA38 : ProfileFrameSection
     {
         private double lengthProfile;
@@ -28,14 +22,24 @@ namespace InventorSegmentsGenerator
         private Material oMaterial;
         private RenderStyle oRenderStyle;
 
-        public ProfileA38(Inventor.Application m_inventorApplication, double lengthProfile, string materialProfile = "", string colorProfile = "")
-            : base(m_inventorApplication)
+        /// <summary>
+        /// Класс, создающий профиль Швеллер А38.
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="lengthProfile">Длина создаваемого профиля (см).</param>
+        /// <param name="materialProfile">Материал создаваемого профиля.</param>
+        /// <param name="colorProfile">Цвет создаваемого профиля.</param>
+        public ProfileA38(Inventor.Application invApp, double lengthProfile, string materialProfile = "", string colorProfile = "")
+            : base(invApp)
         {
             this.lengthProfile = lengthProfile;
             this.materialProfile = materialProfile;
             this.colorProfile = colorProfile;
         }
 
+        /// <summary>
+        /// Создание профиля швеллера.
+        /// </summary>
         public void createProfile()
         {
             oSketch = oCompDef.Sketches.Add(oPartDoc.ComponentDefinition.WorkPlanes[3]);

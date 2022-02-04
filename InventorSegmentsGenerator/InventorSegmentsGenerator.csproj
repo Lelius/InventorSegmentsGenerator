@@ -141,13 +141,12 @@
     </Compile>
     <Compile Include="PartsSection\PillarPartA38.cs" />
     <Compile Include="PartsSection\PillarPartA48.cs" />
-    <Compile Include="ProfilesSection\ProfileB30x7-3.cs" />
     <Compile Include="ProfilesSection\ProfileA30.cs" />
     <Compile Include="ProfilesSection\ProfileA38.cs" />
     <Compile Include="ProfilesSection\ProfileA48.cs" />
     <Compile Include="ProfilesSection\ProfileAKSP5.cs" />
     <Compile Include="ProfilesSection\ProfileAP58.cs" />
-    <Compile Include="ProfilesSection\ProfileB22x3.cs" />
+    <Compile Include="ProfilesSection\ProfileB_DxS.cs" />
     <Compile Include="ProfilesSection\ProfileE29.cs" />
     <Compile Include="ProfilesSection\ProfileE38.cs" />
     <Compile Include="ProfilesSection\ProfileFrameSection.cs" />

@@ -15,15 +15,35 @@ namespace InventorSegmentsGenerator
             set { basicAngle = value; }
         }
 
+        /// <summary>
+        /// Высота стойки (см).
+        /// </summary>
         public double heightPillar;
+        /// <summary>
+        /// Количество отверстий под крепежные болты.
+        /// </summary>
         public int numberOfHoles;
+        /// <summary>
+        /// Коллекция расстояний между отверстиями для крепежных болтов, начиная от верхней кромки стойки,
+        /// в формате <номер, расстояние (см)>.
+        /// </summary>
         public Dictionary<int, double> distanceToHoles;
         public TypeOfFasteningEnum typeOfFastening;
+        /// <summary>
+        /// Диаметр отверстия под крепежный болт (см).
+        /// </summary>
         public double holeBoltDiametr;
+        /// <summary>
+        /// Диаметр отверстия под арматуру при бетонировании нижнего конца стойки в грунт (см).
+        /// </summary>
         public double holeGroundDiametr;
 
         protected Face oFrontFace;
 
+        /// <summary>
+        /// Создание детали Стойка (швеллер А38)
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application</param>
         public PillarPartA38(Inventor.Application invApp) : base(invApp, 120, "Стеклопластик", "Оранжевый")
         {
             heightPillar = 120;
@@ -35,6 +55,14 @@ namespace InventorSegmentsGenerator
             basicAngle = 0;
         }
 
+        /// <summary>
+        /// Создание детали Стойка (швеллер А38)
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application</param>
+        /// <param name="heightPillar">Высота стойки (см)</param>
+        /// <param name="materialProfile">Материал стойки.</param>
+        /// <param name="colorProfile">Цвет стойки.</param>
+        /// <param name="typeOfFastening">Вариант нижнего окончания стойки.</param>
         public PillarPartA38(Inventor.Application invApp, double heightPillar, string materialProfile, string colorProfile, TypeOfFasteningEnum typeOfFastening) :
             base(invApp, heightPillar, materialProfile, colorProfile)
 
@@ -57,6 +85,10 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Обработка нижних концов стоек 
+        /// в соответствии с выбранным вариантом установки секции TypeOfFasteningEnum.
+        /// </summary>
         private void createGroundHoles()
         {
             switch (typeOfFastening)
@@ -113,6 +145,9 @@ namespace InventorSegmentsGenerator
             }
         }
 
+        /// <summary>
+        /// Обрезка верхних концов стоек в соответствии со значением BasicAngle.
+        /// </summary>
         private void createAngleCut()
         {
             if (Math.Abs(BasicAngle) < 0.0000001)
@@ -181,7 +216,9 @@ namespace InventorSegmentsGenerator
             }
         }
 
-
+        /// <summary>
+        /// Создание отверстий в вертикальных стойках под крепежные болты.
+        /// </summary>
         private void createBoltHoles()
         {
             ExtrudeFeature extrudeFeature = oCompDef.Features.ExtrudeFeatures["Выдавливание1"];
@@ -219,6 +256,11 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Вычисление длины противолежащего катета по гипотенузе (высоте полки профиля) и прилежащему углу.
+        /// </summary>
+        /// <param name="angle">Значение прилежащего угла (град).</param>
+        /// <returns>Длина противолежащего катета (см).</returns>
         static private protected double getCathe(double angle)
         {
             if (angle == 0)

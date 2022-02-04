@@ -65,6 +65,26 @@ namespace InventorSegmentsGenerator
             numericUpDownHeightTopCrossbarRail.Value = (decimal)compositeSection.HeightTopCrossbarRail;
             numericUpDownHeightBottomCrossbarRail.Value = (decimal)compositeSection.HeightBottomCrossbarRail;
             numericUpDownHeightGroundRail.Value = (decimal)compositeSection.HeightGroundRail;
+
+            TabPage tabPage1 = new TabPage("Tab 1");
+            TabPage tabPage2 = new TabPage("Tab 2");
+            tabControlSubsections.Controls.Add(tabPage1);
+            tabControlSubsections.Controls.Add(tabPage2);
+
+            UserControl userControl = new UserControl();
+            TableLayoutPanel tableLayoutPanel5 = new TableLayoutPanel();
+            tableLayoutPanel5.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            tableLayoutPanel5.Dock = DockStyle.Fill;
+            userControl.Controls.Add(tableLayoutPanel5);
+            tabPage1.Controls.Add(userControl);
+
+            tableLayoutPanel5.RowCount = 8;
+            tableLayoutPanel5.ColumnCount = 2;
+            ColumnStyle columnStyle = new ColumnStyle();
+            columnStyle.SizeType = SizeType.Percent;
+            columnStyle.Width = 70;
+            tableLayoutPanel5.ColumnStyles.Add(columnStyle);
+            
         }
     }
 }

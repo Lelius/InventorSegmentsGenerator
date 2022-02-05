@@ -11,11 +11,11 @@ namespace InventorSegmentsGenerator
         /// <summary>
         /// Главный объект Inventor.Application
         /// </summary>
-        public Inventor.Application oInvApp { get; set; }
-        public Document oDoc { get; set; }
-        public PartDocument oPartDoc { get; set; }
-        public PartComponentDefinition oCompDef { get; set; }
-        public TransientGeometry oTransGeo { get; set; }
+        private protected Inventor.Application oInvApp { get; set; }
+        private protected Document oDoc { get; set; }
+        private protected PartDocument oPartDoc { get; set; }
+        private protected PartComponentDefinition oCompDef { get; set; }
+        private protected TransientGeometry oTransGeo { get; set; }
 
         /// <summary>
         /// Абстрактный класс-каркас профиля, содержащий основные объекты-документы.

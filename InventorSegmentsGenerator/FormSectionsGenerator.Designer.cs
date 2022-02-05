@@ -170,7 +170,7 @@ namespace InventorSegmentsGenerator
             this.comboBoxChannel.Items.AddRange(new object[] {
             "А38",
             "А48"});
-            this.comboBoxChannel.Location = new System.Drawing.Point(439, 23);
+            this.comboBoxChannel.Location = new System.Drawing.Point(439, 24);
             this.comboBoxChannel.Name = "comboBoxChannel";
             this.comboBoxChannel.Size = new System.Drawing.Size(100, 28);
             this.comboBoxChannel.Sorted = true;

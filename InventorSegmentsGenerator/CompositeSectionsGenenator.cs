@@ -8,20 +8,20 @@ namespace InventorSegmentsGenerator
 {
     class CompositeSectionsGenenator
     {
-        Inventor.Application m_inventorApplication;
-        Inventor.ApplicationEvents m_applicationEvents;
-        string m_ClientId = "{43457a9b-2327-48bc-9c57-be7407696fb3}";
-        ButtonDefinition m_buttonSectionsGenerator;
-        ButtonIcons m_buttonIcons;
-        FormSectionsGenerator m_mainForm;
+        private Inventor.Application invApp;
+        private Inventor.ApplicationEvents invAppEvents;
+        private string m_ClientId = "{43457a9b-2327-48bc-9c57-be7407696fb3}";
+        ButtonDefinition buttonSectionsGenerator;
+        ButtonIcons buttonIcons;
+        FormSectionsGenerator mainFormGenerator;
         List<double> distanceToHoles = new List<double>();
         CompositeSection compositeSection;
 
-        public CompositeSectionsGenenator(Inventor.Application m_inventorApplication)
+        public CompositeSectionsGenenator(Inventor.Application invApp)
         {
-            this.m_inventorApplication = m_inventorApplication;
-            this.m_applicationEvents = m_inventorApplication.ApplicationEvents;
-            m_buttonIcons = new ButtonIcons(InvAddIn.Properties.Resources.Секция_16х16, InvAddIn.Properties.Resources.Секция_32х32);
+            this.invApp = invApp;
+            this.invAppEvents = invApp.ApplicationEvents;
+            buttonIcons = new ButtonIcons(InvAddIn.Properties.Resources.Секция_16х16, InvAddIn.Properties.Resources.Секция_32х32);
         }
 
         public void MainGenerator()
@@ -29,10 +29,10 @@ namespace InventorSegmentsGenerator
             //Создание кнопки Ribbon "Генератор секций"
             createButtonOnRibbon();
 
-            m_buttonSectionsGenerator.OnExecute += M_buttonSectionsGenerator_OnExecute;
+            buttonSectionsGenerator.OnExecute += ButtonSectionsGenerator_OnExecute;
         }
 
-        private void M_buttonSectionsGenerator_OnExecute(NameValueMap Context)
+        private void ButtonSectionsGenerator_OnExecute(NameValueMap Context)
         {
             string projectPath = System.Environment.ExpandEnvironmentVariables("%USERPROFILE%\\Desktop\\Section\\");
             string projectName = "Section";
@@ -54,9 +54,11 @@ namespace InventorSegmentsGenerator
             //ComponentOccurrence pillarPartLeft1 = oAssDoc.ComponentDefinition.Occurrences.Add(pillarPart.oDoc.FullFileName, oPositionMatrix);
 
             compositeSection = new CompositeSection(150);
+            CrossbarPartA38 crossbarPartA38 = new CrossbarPartA38(invApp, 15);
+            
 
-            m_mainForm = new FormSectionsGenerator(compositeSection);
-            m_mainForm.Show();
+            mainFormGenerator = new FormSectionsGenerator(compositeSection);
+            mainFormGenerator.Show();
         }
 
         #region Создание и активация проекта
@@ -120,9 +122,9 @@ namespace InventorSegmentsGenerator
         #region Создание кнопки Ribbon "Генератор секций"
         public void createButtonOnRibbon()
         {
-            UserInterfaceManager userInterfaceManager = m_inventorApplication.UserInterfaceManager;
-            ControlDefinitions controlDefinitions = m_inventorApplication.CommandManager.ControlDefinitions;
-            m_buttonSectionsGenerator = controlDefinitions.AddButtonDefinition("Генератор секций", "id_SectionsGenerator", CommandTypesEnum.kNonShapeEditCmdType, m_ClientId, "", "", m_buttonIcons.IconStandart, m_buttonIcons.IconLarge);
+            UserInterfaceManager userInterfaceManager = invApp.UserInterfaceManager;
+            ControlDefinitions controlDefinitions = invApp.CommandManager.ControlDefinitions;
+            buttonSectionsGenerator = controlDefinitions.AddButtonDefinition("Генератор секций", "id_SectionsGenerator", CommandTypesEnum.kNonShapeEditCmdType, m_ClientId, "", "", buttonIcons.IconStandart, buttonIcons.IconLarge);
 
             Ribbon zeroRibbon = userInterfaceManager.Ribbons["ZeroDoc"];
             RibbonTab startedTab = zeroRibbon.RibbonTabs["id_GetStarted"];
@@ -135,13 +137,7 @@ namespace InventorSegmentsGenerator
             }
 
             RibbonPanel newPanel = startedTab.RibbonPanels.Add("Перильные ограждения", "id_PanelPerileFences", m_ClientId);
-            newPanel.CommandControls.AddButton(m_buttonSectionsGenerator, true);
-        }
-
-
-        private class PathToRibbon
-        {
-
+            newPanel.CommandControls.AddButton(buttonSectionsGenerator, true);
         }
 
 

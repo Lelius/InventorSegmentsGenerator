@@ -4,19 +4,27 @@ using Inventor;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий деталь Стойка (швеллер А38).
+    /// </summary>
     public class PillarPartA38 : ProfileA38
     {
+        /// <summary>
+        /// Высота боковой грани профиля А38.
+        /// </summary>
         const double HeightProfile = 2.5;
 
         private double basicAngle;
+        /// <summary>
+        /// Основной угол наклона секции.
+        /// </summary>
         public double BasicAngle
         {
             get { return basicAngle; }
             set { basicAngle = value; }
         }
-
         /// <summary>
-        /// Высота стойки (см).
+        /// Высота Стойки (см).
         /// </summary>
         public double heightPillar;
         /// <summary>
@@ -24,7 +32,7 @@ namespace InventorSegmentsGenerator
         /// </summary>
         public int numberOfHoles;
         /// <summary>
-        /// Коллекция расстояний между отверстиями для крепежных болтов, начиная от верхней кромки стойки,
+        /// Коллекция расстояний между отверстиями для крепежных болтов, начиная от верхней кромки Стойки,
         /// в формате <номер, расстояние (см)>.
         /// </summary>
         public Dictionary<int, double> distanceToHoles;
@@ -34,14 +42,14 @@ namespace InventorSegmentsGenerator
         /// </summary>
         public double holeBoltDiametr;
         /// <summary>
-        /// Диаметр отверстия под арматуру при бетонировании нижнего конца стойки в грунт (см).
+        /// Диаметр отверстия под арматуру при бетонировании нижнего конца Стойки в грунт (см).
         /// </summary>
         public double holeGroundDiametr;
 
         protected Face oFrontFace;
 
         /// <summary>
-        /// Создание детали Стойка (швеллер А38)
+        /// Класс, создающий деталь Стойка (швеллер А38).
         /// </summary>
         /// <param name="invApp">Главный объект Inventor.Application</param>
         public PillarPartA38(Inventor.Application invApp) : base(invApp, 120, "Стеклопластик", "Оранжевый")
@@ -56,13 +64,13 @@ namespace InventorSegmentsGenerator
         }
 
         /// <summary>
-        /// Создание детали Стойка (швеллер А38)
+        /// Класс, создающий деталь Стойка (швеллер А38).
         /// </summary>
-        /// <param name="invApp">Главный объект Inventor.Application</param>
-        /// <param name="heightPillar">Высота стойки (см)</param>
-        /// <param name="materialProfile">Материал стойки.</param>
-        /// <param name="colorProfile">Цвет стойки.</param>
-        /// <param name="typeOfFastening">Вариант нижнего окончания стойки.</param>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="heightPillar">Высота Стойки (см).</param>
+        /// <param name="materialProfile">Материал Стойки.</param>
+        /// <param name="colorProfile">Цвет Стойки.</param>
+        /// <param name="typeOfFastening">Вариант нижнего окончания Стойки.</param>
         public PillarPartA38(Inventor.Application invApp, double heightPillar, string materialProfile, string colorProfile, TypeOfFasteningEnum typeOfFastening) :
             base(invApp, heightPillar, materialProfile, colorProfile)
 
@@ -89,7 +97,7 @@ namespace InventorSegmentsGenerator
 
 
         /// <summary>
-        /// Обработка нижних концов стоек 
+        /// Обработка нижнего конца Стойки 
         /// в соответствии с выбранным вариантом установки секции TypeOfFasteningEnum.
         /// </summary>
         private void createGroundHoles()
@@ -149,7 +157,7 @@ namespace InventorSegmentsGenerator
         }
 
         /// <summary>
-        /// Обрезка верхних концов стоек в соответствии со значением BasicAngle.
+        /// Обрезка верхнего конца Стойки в соответствии со значением BasicAngle.
         /// </summary>
         private void createAngleCut()
         {
@@ -220,7 +228,7 @@ namespace InventorSegmentsGenerator
         }
 
         /// <summary>
-        /// Создание отверстий в вертикальных стойках под крепежные болты.
+        /// Создание отверстий в Стойке под крепежные болты.
         /// </summary>
         private void createBoltHoles()
         {

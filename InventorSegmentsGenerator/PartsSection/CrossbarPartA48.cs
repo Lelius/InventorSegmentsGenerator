@@ -4,16 +4,28 @@ using System.Collections.Generic;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий деталь Перекладина (профиль А48).
+    /// </summary>
     class CrossbarPartA48 : ProfileA48
     {
         private double lengthCrossbar;
         private double basicAngle;
+        /// <summary>
+        /// Основной угол наклона секции.
+        /// </summary>
         public double BasicAngle
         {
             get { return basicAngle; }
             set { basicAngle = value; }
         }
+        /// <summary>
+        /// Список расстояний от боковой (левой) стойки до отверстий для прутков-труб (см).
+        /// </summary>
         public List<double> distanceToHoles;
+        /// <summary>
+        /// Диаметр отверстия для вертикального прутка-трубы (см).
+        /// </summary>
         public double holeDiametr;
 
         protected Point2d[] oPointsNear;
@@ -26,8 +38,13 @@ namespace InventorSegmentsGenerator
 
         protected PlanarSketch oSketchHoles;
 
-        public CrossbarPartA48(Inventor.Application InvApp, double lengthCrossbar) : 
-            base (InvApp, lengthCrossbar + 10, "Стеклопластик", "Оранжевый")                    // + 100 мм на случай наклонной перекладины
+        /// <summary>
+        /// Класс, создающий деталь Перекладина (профиль А48).
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="lengthCrossbar">Длина детали Перекладина (см).</param>
+        public CrossbarPartA48(Inventor.Application invApp, double lengthCrossbar) : 
+            base (invApp, lengthCrossbar + 10, "Стеклопластик", "Оранжевый")                    // + 100 мм на случай наклонной перекладины
         {
             this.lengthCrossbar = lengthCrossbar;
             BasicAngle = 0;
@@ -36,6 +53,9 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Создает деталь Перекладина.
+        /// </summary>
         public void createCrossbarPart()
         {
             createProfile();
@@ -44,6 +64,9 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Создает отверстия для вертикальных прутков-труб.
+        /// </summary>
         public void createHoles()
         {
             WorkPoint oWorkDeltaOriginPoint = null;
@@ -77,6 +100,9 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Создает соединительные шипы на концах профиля.
+        /// </summary>
         private void createSpikes()
         {
             Point oPointOne = oTransGeo.CreatePoint(0, 0, -5);

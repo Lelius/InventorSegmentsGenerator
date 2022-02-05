@@ -1,30 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inventor;
-using System.Windows.Forms;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий деталь Стойка (швеллер А48).
+    /// </summary>
     public class PillarPartA48 : ProfileA48
     {
+        /// <summary>
+        /// Высота боковой грани профиля А48.
+        /// </summary>
         const double HeightProfile = 3.2;
 
         private double basicAngle;
+        /// <summary>
+        /// Основной угол наклона секции.
+        /// </summary>
         public double BasicAngle
         {
             get { return basicAngle; }
             set { basicAngle = value; }
         }
-
+        /// <summary>
+        /// Высота Стойки (см).
+        /// </summary>
         public double heightPillar;
+        /// <summary>
+        /// Количество отверстий под крепежные болты.
+        /// </summary>
         public int numberOfHoles;
+        /// <summary>
+        /// Коллекция расстояний между отверстиями для крепежных болтов, начиная от верхней кромки Стойки,
+        /// в формате <номер, расстояние (см)>.
+        /// </summary>
         public Dictionary<int, double> distanceToHoles;
         public TypeOfFasteningEnum typeOfFastening;
+        /// <summary>
+        /// Диаметр отверстия под крепежный болт (см).
+        /// </summary>
         public double holeBoltDiametr;
+        /// <summary>
+        /// Диаметр отверстия под арматуру при бетонировании нижнего конца Стойки в грунт (см).
+        /// </summary>
         public double holeGroundDiametr;
 
         protected Face oFrontFace;
 
+        /// <summary>
+        /// Класс, создающий деталь Стойка (швеллер А38).
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application</param>
         public PillarPartA48(Inventor.Application invApp) : base(invApp, 120, "Стеклопластик", "Оранжевый")
         {
             heightPillar = 120;
@@ -36,6 +63,14 @@ namespace InventorSegmentsGenerator
             basicAngle = 0;
         }
 
+        /// <summary>
+        /// Класс, создающий деталь Стойка (швеллер А38).
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application</param>
+        /// <param name="heightPillar">Высота Стойки (см)</param>
+        /// <param name="materialProfile">Материал Стойки.</param>
+        /// <param name="colorProfile">Цвет Стойки.</param>
+        /// <param name="typeOfFastening">Вариант нижнего окончания Стойки.</param>
         public PillarPartA48(Inventor.Application invApp, double heightPillar, string materialProfile, string colorProfile, TypeOfFasteningEnum typeOfFastening) :
             base (invApp, heightPillar, materialProfile, colorProfile)
 
@@ -49,6 +84,9 @@ namespace InventorSegmentsGenerator
             basicAngle = 0;
         }
 
+        /// <summary>
+        /// Создание детали Стойка.
+        /// </summary>
         public void createPillarPart()
         {
             createProfile();
@@ -58,6 +96,10 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Обработка нижнего конца Стойки 
+        /// в соответствии с выбранным вариантом установки секции TypeOfFasteningEnum.
+        /// </summary>
         private void createGroundHoles()
         {
             switch (typeOfFastening)
@@ -114,6 +156,9 @@ namespace InventorSegmentsGenerator
             }
         }
 
+        /// <summary>
+        /// Обрезка верхнего конца Стойки в соответствии со значением BasicAngle.
+        /// </summary>
         private void createAngleCut()
         {
             if (Math.Abs(BasicAngle) < 0.0000001)
@@ -182,7 +227,9 @@ namespace InventorSegmentsGenerator
             }
         }
 
-
+        /// <summary>
+        /// Создание отверстий в Стойке под крепежные болты.
+        /// </summary>
         private void createBoltHoles()
         {
             ExtrudeFeature extrudeFeature = oCompDef.Features.ExtrudeFeatures["Выдавливание1"];
@@ -220,6 +267,11 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Вычисление длины противолежащего катета по гипотенузе (высоте полки профиля) и прилежащему углу.
+        /// </summary>
+        /// <param name="angle">Значение прилежащего угла (град).</param>
+        /// <returns>Длина противолежащего катета (см).</returns>
         static private protected double getCathe(double angle)
         {
             if (angle == 0)

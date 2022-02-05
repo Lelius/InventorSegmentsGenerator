@@ -3,10 +3,16 @@ using Inventor;
 
 namespace InventorSegmentsGenerator
 {
+    /// <summary>
+    /// Класс, создающий деталь Вкладыш Е29.
+    /// </summary>
     public class LinerPartE29 : ProfileE29
     {
         private double lengthLiner;
         private double basicAngle;
+        /// <summary>
+        /// Основной угол наклона секции.
+        /// </summary>
         public double BasicAngle
         {
             get { return basicAngle; }
@@ -18,14 +24,23 @@ namespace InventorSegmentsGenerator
         protected PlanarSketch oSketchStartStopSides;
         protected Profile oProfileLiner;
 
-        public LinerPartE29(Inventor.Application m_inventorApplication, double lengthLiner, string materialProfile = "", string colorProfile = "") :
-            base(m_inventorApplication, lengthLiner + 10, materialProfile, colorProfile)
+        /// <summary>
+        /// Класс, создающий деталь Вкладыш Е29.
+        /// </summary>
+        /// <param name="invApp">Главный объект Inventor.Application.</param>
+        /// <param name="lengthLiner">Длина Вкладыша (см).</param>
+        /// <param name="materialProfile">Материал Вкладыша.</param>
+        /// <param name="colorProfile">Цвет Вкладыша.</param>
+        public LinerPartE29(Inventor.Application invApp, double lengthLiner, string materialProfile = "", string colorProfile = "") :
+            base(invApp, lengthLiner + 10, materialProfile, colorProfile)
         {
             this.lengthLiner = lengthLiner;
             BasicAngle = 0;
         }
 
-
+        /// <summary>
+        /// Создание детали Вкладыш Е29.
+        /// </summary>
         public void createLiner()
         {
             createProfile();
@@ -33,6 +48,9 @@ namespace InventorSegmentsGenerator
         }
 
 
+        /// <summary>
+        /// Придание боковым граням профиля угла BasicAngle.
+        /// </summary>
         private void createStartStopSides()
         {
             oSketchStartStopSides = oCompDef.Sketches.AddWithOrientation(oCompDef.WorkPlanes["Плоскость YZ"], oCompDef.WorkAxes["Ось Z"], false, true, oCompDef.WorkPoints[1], false);

@@ -16,7 +16,7 @@ namespace InventorSegmentsGenerator
     {
 
         // Inventor application object.
-        private Inventor.Application m_inventorApplication;
+        private Inventor.Application invApp;
 
         public StandardAddInServer()
         {
@@ -31,9 +31,9 @@ namespace InventorSegmentsGenerator
             // The FirstTime flag indicates if the addin is loaded for the first time.
 
             // Initialize AddIn members.
-            m_inventorApplication = addInSiteObject.Application;
+            invApp = addInSiteObject.Application;
 
-            CompositeSectionsGenenator myGenerator = new CompositeSectionsGenenator(m_inventorApplication);
+            CompositeSectionsGenenator myGenerator = new CompositeSectionsGenenator(invApp);
             myGenerator.MainGenerator();
 
             // Add ApplicationAddInServer.Activate implementation.
@@ -49,7 +49,7 @@ namespace InventorSegmentsGenerator
             // Add ApplicationAddInServer.Deactivate implementation
 
             // Release objects.
-            m_inventorApplication = null;
+            invApp = null;
 
             GC.Collect();
             GC.WaitForPendingFinalizers();

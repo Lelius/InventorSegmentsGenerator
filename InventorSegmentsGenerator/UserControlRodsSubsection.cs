@@ -28,7 +28,7 @@ namespace InventorSegmentsGenerator
             }
         }
 
-
+        public 
 
         /// <summary>
         /// Класс, содержащий таблицу элементов управления параметрами прутков-труб, упакованную в UserControl.
